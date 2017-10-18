@@ -11,6 +11,8 @@
 
         vm.register = register;
 
+        
+
         function register() {
             vm.dataLoading = true;
             UserService.Create(vm.user)
