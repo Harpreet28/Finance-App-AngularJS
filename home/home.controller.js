@@ -10,14 +10,14 @@
         var vm = this;
 
         vm.user = null;
-        vm.allUsers = [];
+        vm.tickerSymbols = [];
         vm.deleteUser = deleteUser;
 
         initController();
 
         function initController() {
             loadCurrentUser();
-            loadAllUsers();
+            loadTickerSymbols();
         }
 
         function loadCurrentUser() {
@@ -27,17 +27,15 @@
                 });
         }
 
-        function loadAllUsers() {
-            UserService.GetAll()
-                .then(function (users) {
-                    vm.allUsers = users;
-                });
+        function loadTickerSymbols() {
+            
+            vm.tickerSymbols = [{"change": 1.59, "name": "GOOG", "price": 752.52, "volume": 234536 }, {"change": 1.59, "name": "YAHOO", "price": 52, "volume": 0 }, {"change": 1.59, "name": "FB", "price": 127.52, "volume": 1956743 }];
         }
 
         function deleteUser(id) {
             UserService.Delete(id)
             .then(function () {
-                loadAllUsers();
+                loadtickerSymbols();
             });
         }
     }

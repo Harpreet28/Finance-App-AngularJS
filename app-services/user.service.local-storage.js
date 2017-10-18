@@ -5,12 +5,12 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$inject = ['$timeout', '$filter', '$q'];
-    function UserService($timeout, $filter, $q) {
+    UserService.$inject = ['$http','$timeout', '$filter', '$q'];
+    function UserService($http,$timeout, $filter, $q) {
 
         var service = {};
 
-        service.GetAll = GetAll;
+        service.getAllTickerSymbols = getAllTickerSymbols;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
         service.Create = Create;
@@ -19,10 +19,8 @@
 
         return service;
 
-        function GetAll() {
-            var deferred = $q.defer();
-            deferred.resolve(getUsers());
-            return deferred.promise;
+        function getAllTickerSymbols() {
+            return $http.get('mockData.json').then(handleSuccess, handleError('Error getting all Data'));
         }
 
         function GetById(id) {
@@ -108,12 +106,20 @@
             if(!localStorage.users){
                 localStorage.users = JSON.stringify([]);
             }
-
             return JSON.parse(localStorage.users);
         }
 
         function setUsers(users) {
             localStorage.users = JSON.stringify(users);
+        }
+        function handleSuccess(res) {
+            return res.data;
+        }
+
+        function handleError(error) {
+            return function () {
+                return { success: false, message: error };
+            };
         }
     }
 })();

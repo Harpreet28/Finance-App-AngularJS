@@ -1,10 +1,12 @@
 ﻿<h1>Hi {{vm.user.firstName}}!</h1>
-<p>You're logged in!!</p>
-<h3>All registered users:</h3>
+<p>Welcome to your finance portfolio!!</p>
+<h3>Here is your favorite ticker symbols:</h3>
 <ul>
-    <li ng-repeat="user in vm.allUsers">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a ng-click="vm.deleteUser(user.id)">Delete</a>
+    <li ng-repeat="data in vm.tickerSymbols">
+        {{data.name}} 
+        {{data.price}} 
+        {{data.change}}
+        {{data.volume}}
     </li>
 </ul>
 <p>&nbsp;</p>

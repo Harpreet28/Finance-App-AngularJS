@@ -19,36 +19,36 @@
         return service;
 
         function GetAll() {
-            return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get('/api/tickerSymbols').then(success, error('Failed to get all tickerSymbols'));
         }
 
         function GetById(id) {
-            return $http.get('/api/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get('/api/users/' + id).then(success, error('Failed to getuser by id'));
         }
 
         function GetByUsername(username) {
-            return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.get('/api/users/' + username).then(success, error('Failed to get user by username'));
         }
 
         function Create(user) {
-            return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post('/api/users', user).then(success, error('Failed to get creat user'));
         }
 
         function Update(user) {
-            return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));
+            return $http.put('/api/users/' + user.id, user).then(success, error('Failed to get update user'));
         }
 
         function Delete(id) {
-            return $http.delete('/api/users/' + id).then(handleSuccess, handleError('Error deleting user'));
+            return $http.delete('/api/users/' + id).then(success, error('Failed to get delete user'));
         }
 
         // private functions
 
-        function handleSuccess(res) {
+        function success(res) {
             return res.data;
         }
 
-        function handleError(error) {
+        function error(error) {
             return function () {
                 return { success: false, message: error };
             };
