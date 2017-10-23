@@ -1,4 +1,10 @@
 ﻿a {
     cursor: pointer;
-    
+}
+.form-text {
+	font-weight:bold;
+	font-size:10px;
+}
+.left-padding{
+	padding-left:0;
 }

@@ -15,7 +15,8 @@
         service.Create = Create;
         service.Update = Update;
         service.Delete = Delete;
-
+        service.GetUserDetailsByUserName = GetUserDetailsByUserName;
+        
         return service;
 
         function GetAll() {
@@ -41,11 +42,20 @@
         function Delete(id) {
             return $http.delete('/api/users/' + id).then(success, error('Failed to get delete user'));
         }
+        
+        function GetUserDetailsByUserName(username){
+        	console.log("inside service");
+        		return $http({  
+        			method: 'GET',
+        			dataType:'json',
+        			url: "http://13.92.135.96/FinancePortfolioAPI/api/user/GetUserDetailsByUserName/" + username
+        			}) .then(success, error('Failed to get user by username'));
+        }
 
         // private functions
 
         function success(res) {
-            return res.data;
+            return { success: true, data:res.data};
         }
 
         function error(error) {
