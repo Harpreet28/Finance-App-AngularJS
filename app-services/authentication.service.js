@@ -38,6 +38,13 @@
             //    .success(function (response) {
             //        callback(response);
             //    });
+            
+            /* $http({  
+			method: 'POST',
+			dataType:'json',
+			data: { username: "patel", password: "patel" },
+			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/ValidateUser/" 
+			}) .then(success, error('Failed to get user by username'));*/
 
         }
 
