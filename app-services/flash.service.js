@@ -11,6 +11,7 @@
 
         service.Success = Success;
         service.Error = Error;
+        service.deleteFlashMessage = deleteFlashMessage;
 
         initService();
 
@@ -48,6 +49,11 @@
                 type: 'error',
                 keepAfterLocationChange: keepAfterLocationChange
             };
+        }
+        
+        function deleteFlashMessage(){
+        	console.log("delete");
+        		delete $rootScope.flash;
         }
     }
 

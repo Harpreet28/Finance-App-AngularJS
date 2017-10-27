@@ -9,42 +9,30 @@
     function UserService($http) {
         var service = {};
 
-        service.GetAll = GetAll;
-        service.GetById = GetById;
-        service.GetByUsername = GetByUsername;
-        service.Create = Create;
-        service.Update = Update;
-        service.Delete = Delete;
+        service.GetUserTickersDetails = GetUserTickersDetails;
+        service.UpdateTickerSymbols = UpdateTickerSymbols;
         service.GetUserDetailsByUserName = GetUserDetailsByUserName;
         
         return service;
 
-        function GetAll() {
-            return $http.get('/api/tickerSymbols').then(success, error('Failed to get all tickerSymbols'));
+        function GetUserTickersDetails(userId) {
+	        	return $http({  
+	    			method: 'GET',
+	    			dataType:'json',
+	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/GetUserTickersDetails/" + userID
+	    			}) .then(success, error('Failed to get ticker symbols for the user'));          
         }
 
-        function GetById(id) {
-            return $http.get('/api/users/' + id).then(success, error('Failed to getuser by id'));
-        }
-
-        function GetByUsername(username) {
-            return $http.get('/api/users/' + username).then(success, error('Failed to get user by username'));
-        }
-
-        function Create(user) {
-            return $http.post('/api/users', user).then(success, error('Failed to get creat user'));
-        }
-
-        function Update(user) {
-            return $http.put('/api/users/' + user.id, user).then(success, error('Failed to get update user'));
-        }
-
-        function Delete(id) {
-            return $http.delete('/api/users/' + id).then(success, error('Failed to get delete user'));
-        }
+        function UpdateTickerSymbols(userId, tickerSymbolId, tickerSymbolName, active) {
+	        	return $http({  
+	    			method: 'POST',
+	    			dataType:'json',
+	    			data: { UserId: userID, TickerSymbolId: tickerSymbolId, TickerSymbolName: tickerSymbolName, Active: active },
+	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/UpdateTickerSymbols" 
+	    			}) .then(success, error('Failed to get ticker symbols for the user'));          
+	    }
         
         function GetUserDetailsByUserName(username){
-        	console.log("inside service");
         		return $http({  
         			method: 'GET',
         			dataType:'json',
