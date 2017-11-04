@@ -15,11 +15,39 @@
 
         return service;
 
-        function Login(username, password, callback) {
+        function Login(username, password) {
+        		console.log("Login User API call");
+            		return $http({  
+                    method: "POST", 
+                    dataType: "json" ,  
+                    data: {UserId: 0, UserName: username, Password: password},
+                    url: "http://13.92.135.96/FinancePortfolioAPI/api/User/ValidateUser",   
+                    }).then(success, error('Failed to get user by username'));
+            }
+        
+        function success(res) {
+            return { success: true, data:res.data};
+        }
 
+        function error(error) {
+            return function () {
+            	console.log("errorrrr");
+                return { success: false, message: error };
+            };
+        }
+        		/*return UserService.GetLoginDetails(username, password)
+        			.then(function (response) {
+                    if (response.data.UserId != 0) {
+                        response = { success: true };
+                        console.log("success");
+                    } else {
+                        response = { success: false, message: 'Username or password is incorrect' };
+                    }
+        			});*/
+        
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            $timeout(function () {
+           /* $timeout(function () {
                 var response;
                 UserService.GetByUsername(username)
                     .then(function (user) {
@@ -30,23 +58,14 @@
                         }
                         callback(response);
                     });
-            }, 1000);
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
-            
-            /* $http({  
+            }, 1000);*/
+            /* Working code for login
+             $http({  
 			method: 'POST',
 			dataType:'json',
 			data: { username: "patel", password: "patel" },
 			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/ValidateUser/" 
 			}) .then(success, error('Failed to get user by username'));*/
-
-        }
 
         function SetCredentials(username, password) {
             var authdata = Base64.encode(username + ':' + password);
