@@ -12,9 +12,30 @@
         service.GetUserTickersDetails = GetUserTickersDetails;
         service.UpdateTickerSymbols = UpdateTickerSymbols;
         service.GetUserDetailsByUserName = GetUserDetailsByUserName;
+        service.RegisterUser = RegisterUser;
+        service.GetSecurityQuestions = GetSecurityQuestions;
         
         return service;
 
+        function RegisterUser(user) {
+            console.log("RegisterUser API call");
+            console.log(JSON.stringify(user));
+                return $http({  
+                    method: 'POST',
+                    dataType:'json',
+                    url: "http://13.92.135.96/FinancePortfolioAPI/api/User/RegisterUser",
+                    data: user, 
+                    }) .then(success, error('Failed to get user by username'));
+        }
+        
+        function GetSecurityQuestions(){
+        		return $http({  
+	    			method: 'GET',
+	    			dataType:'json',
+	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/user/GetSecurityQuestions",
+	    			}) .then(success, error('Failed to get security questions'));     	
+        }
+        
         function GetUserTickersDetails(userId) {
 	        	return $http({  
 	    			method: 'GET',
@@ -48,6 +69,7 @@
 
         function error(error) {
             return function () {
+            	console.log("errorrrr");
                 return { success: false, message: error };
             };
         }
