@@ -14,6 +14,7 @@
         service.GetUserDetailsByUserName = GetUserDetailsByUserName;
         service.RegisterUser = RegisterUser;
         service.GetSecurityQuestions = GetSecurityQuestions;
+        service.getAllTickerSymbols = getAllTickerSymbols;
         
         return service;
 
@@ -36,11 +37,19 @@
 	    			}) .then(success, error('Failed to get security questions'));     	
         }
         
+        function getAllTickerSymbols(){
+	    		return $http({  
+	    			method: 'GET',
+	    			dataType:'json',
+	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/TickerSymbol/GetAllTickerSymbols"
+	    			}) .then(success, error('Failed to get user by username'));
+	    }
+        
         function GetUserTickersDetails(userId) {
 	        	return $http({  
 	    			method: 'GET',
 	    			dataType:'json',
-	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/GetUserTickersDetails/" + userID
+	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/GetUserTickersDetails/" + userId
 	    			}) .then(success, error('Failed to get ticker symbols for the user'));          
         }
 
@@ -48,9 +57,9 @@
 	        	return $http({  
 	    			method: 'POST',
 	    			dataType:'json',
-	    			data: { UserId: userID, TickerSymbolId: tickerSymbolId, TickerSymbolName: tickerSymbolName, Active: active },
+	    			data: [{ UserId: userId, TickerSymbolId: tickerSymbolId, TickerSymbolName: tickerSymbolName, Active: active }],
 	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/UpdateTickerSymbols" 
-	    			}) .then(success, error('Failed to get ticker symbols for the user'));          
+	    			}) .then(success, error('Failed to update ticker symbols for the user'));          
 	    }
         
         function GetUserDetailsByUserName(username){
@@ -60,7 +69,7 @@
         			url: "http://13.92.135.96/FinancePortfolioAPI/api/user/GetUserDetailsByUserName/" + username
         			}) .then(success, error('Failed to get user by username'));
         }
-
+        
         // private functions
 
         function success(res) {
@@ -69,7 +78,7 @@
 
         function error(error) {
             return function () {
-            	console.log("errorrrr");
+            	console.log("Error : " + error);
                 return { success: false, message: error };
             };
         }

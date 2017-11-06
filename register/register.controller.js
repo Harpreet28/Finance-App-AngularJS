@@ -18,7 +18,6 @@
              UserService.GetSecurityQuestions()
                  .then(function (response) {
                      if (response.success) {
-                    	 console.log(response.data[0]);
                     	 	vm.questionsListOne = response.data;
                     	 	vm.questionsListTwo = response.data;
                      } else {

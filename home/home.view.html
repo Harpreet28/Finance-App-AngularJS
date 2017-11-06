@@ -1,13 +1,44 @@
 ﻿<h1>Hi {{vm.user.firstName}}!</h1>
 <p>Welcome to your finance portfolio!!</p>
 <h3>Here is your favorite ticker symbols:</h3>
+<select ng-model="tickerSymbols" ng-options="data for data in vm.tickerSymbols">
+</select>
 <ul>
-    <li ng-repeat="data in vm.tickerSymbols">
-        {{data.name}} 
-        {{data.price}} 
-        {{data.change}}
-        {{data.volume}}
+    <li ng-repeat="data in vm.UserTickerSymbols">
+        Stock : {{data.longName}} - {{data.ticker}}<br>    
+        Regular Market Price : {{data.regularMarketPrice}}<br> 
+        Regular Market Change : {{data.RegularMarketChange}}<br> 
+        Regular Market Change Percent : {{data.RegularMarketChangePercent}}<br> 
+        Post Market Time : {{data.postMarketTime}}<br> 
+        Previous Close : {{data["Previous Close"]}}<br> 
+        Open : {{data.Open}}<br> 
+        52 Week Range : {{data["52 Week Range"]}}<br> 
+        Earnings Date : {{data["Earnings Date"]}}
     </li>
 </ul>
+<form name="form" ng-submit="vm.addTickerSymbols()" role="form">
+	<div class="form-group">
+		<label for="username">Stock</label>
+        <input type="text" name="Addtickersymbol" id="addTickerSymbol" class="form-control" ng-model="vm.AddTickerSymbolName" required />
+	</div>
+	<div class="form-group">
+        	<input type="hidden" ng-model="vm.user.UserId"  value={{vm.user.UserId}} >
+    </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>
+<form name="form" ng-submit="vm.deleteTickerSymbols()" role="form">
+	<div class="form-group">
+		<label for="username">Stock</label>
+        <input type="text" name="Deletetickersymbol" id="deleteickerSymbol" class="form-control" ng-model="vm.DeleteTickerSymbolName" required />
+	</div>
+	<div class="form-group">
+        <input type="hidden" ng-model="vm.user.UserId"  value={{vm.user.UserId}} >
+    </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </div>
+</form>
 <p>&nbsp;</p>
 <p><a href="#!/login" class="btn btn-primary">Logout</a></p>

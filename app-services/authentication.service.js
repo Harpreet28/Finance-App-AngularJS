@@ -29,11 +29,8 @@
             return { success: true, data:res.data};
         }
 
-        function error(error) {
-            return function () {
-            	console.log("errorrrr");
-                return { success: false, message: error };
-            };
+        function error(errorMsg) {
+            return { success: false, message:errorMsg };
         }
         		/*return UserService.GetLoginDetails(username, password)
         			.then(function (response) {
@@ -67,13 +64,14 @@
 			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/ValidateUser/" 
 			}) .then(success, error('Failed to get user by username'));*/
 
-        function SetCredentials(username, password) {
+        function SetCredentials(username, password, userId) {
             var authdata = Base64.encode(username + ':' + password);
 
             $rootScope.globals = {
                 currentUser: {
                     username: username,
-                    authdata: authdata
+                    authdata: authdata,
+                    userId: userId
                 }
             };
 
