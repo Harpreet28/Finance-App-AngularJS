@@ -1,21 +1,104 @@
-﻿<h1>Hi {{vm.user.firstName}}!</h1>
-<p>Welcome to your finance portfolio!!</p>
-<h3>Here is your favorite ticker symbols:</h3>
-<select ng-model="tickerSymbols" ng-options="data for data in vm.tickerSymbols">
-</select>
-<ul>
-    <li ng-repeat="data in vm.UserTickerSymbols">
-        Stock : {{data.longName}} - {{data.ticker}}<br>    
-        Regular Market Price : {{data.regularMarketPrice}}<br> 
-        Regular Market Change : {{data.RegularMarketChange}}<br> 
-        Regular Market Change Percent : {{data.RegularMarketChangePercent}}<br> 
-        Post Market Time : {{data.postMarketTime}}<br> 
-        Previous Close : {{data["Previous Close"]}}<br> 
-        Open : {{data.Open}}<br> 
-        52 Week Range : {{data["52 Week Range"]}}<br> 
-        Earnings Date : {{data["Earnings Date"]}}
-    </li>
-</ul>
+﻿<div class="container span12">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Fp</a>
+        </div>
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+               <li><a href="#">Settings</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/login">Logout</a></li>
+            </ul>
+        </div>
+    </nav>                         
+<h2>Hi {{vm.user.firstName}}!</h2>
+<h3>Welcome to your finance portfolio!!</h3>
+<br>
+       <div id="stockTable">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>
+                            Symbol
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Open
+                        </th>
+                        <th>
+                            High
+                        </th>
+                        <th>
+                            Low
+                        </th>
+                        <th>
+                            Change
+                        </th>
+                        <th>
+                            %
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="loading" ng-show="vm.tickerSymbols==0">
+                        <td colspan="12">
+                            loading...
+                        </td>
+                    </tr>
+                    <tr ng-repeat="stock in vm.tickerSymbols" >
+                        <td>
+                            {{stock.ticker}}
+                        </td>
+                        <td>
+                            {{stock.regularMarketPrice | number:2}}
+                        </td>
+                        <td>
+                            {{stock.Open | number:2}}
+                        </td>
+                        <td>
+                            {{stock.dayHigh | number:2}}
+                        </td>
+                        <td>
+                            {{stock.dayLow | number:2}}
+                        </td>
+                        <td>
+                            {{stock.RegularMarketChange}}
+                        </td>
+                        <td>
+                            {{stock.RegularMarketChangePercent}}
+                        </td>
+                        <td>
+                            <a ng-click="deleteTicker(stock.ticker)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h2>
+<p>&nbsp;</p>
+</div> 
 <form name="form" ng-submit="vm.addTickerSymbols()" role="form">
 	<div class="form-group">
 		<label for="username">Stock</label>
