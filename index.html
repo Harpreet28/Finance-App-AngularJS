@@ -9,8 +9,7 @@
 </head>
 <body>
 	<div>
-		<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-        <div ng-view></div>
+		<div ng-view></div>
 	</div>
     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular.min.js"></script>

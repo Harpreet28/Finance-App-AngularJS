@@ -20,18 +20,22 @@ a {
 .span12{
 	text-align: center;
 }
+.alert-danger {
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important; 
+    color: #cc0052;
+}
 /**Login Page styling **/
 
 .login-container {
   width: 500px;
   height: 400px;
   margin: 150px auto;
-  border: 1px solid #cc0052;
-  border-radius: 8px;
 }
 .login {
-  margin:60px;
-  
+	padding: 60px;
+    border: 1px solid #cc0052;
+    border-radius: 8px;
 }
 .login-heading {
   font: 1.8em/48px "Tenor Sans", sans-serif;
@@ -76,7 +80,6 @@ a {
   border: none;
   background: white;
   color: #000;
-  opacity: .85 !important;
 }
 .form-link, .form-link:hover{
   line-height: 3em;
