@@ -13,7 +13,7 @@
         vm.tickerSymbols = [];
         vm.addTickerSymbols = addTickerSymbols;
         vm.deleteTickerSymbols = deleteTickerSymbols;
-        
+
         initController();
 
         function initController() {
@@ -53,6 +53,7 @@
         		.then(function (response) {
                     if (response.success) {
                     		vm.UserTickerSymbols = response.data;
+                    		console.log(vm.UserTickerSymbols);
                     } else {
                     		FlashService.Error(response.message);
                     }
@@ -72,9 +73,9 @@
         			})
         }
         
-        function deleteTickerSymbols(){
-    		console.log("Home Controller - Delete Ticker Symbol");
-    		UserService.UpdateTickerSymbols(vm.user.UserId, 0, vm.DeleteTickerSymbolName, false).
+        function deleteTickerSymbols(DeleteTickerSymbolName){
+    		console.log("Home Controller - Delete Ticker Symbol" + DeleteTickerSymbolName);
+    		UserService.UpdateTickerSymbols(vm.user.UserId, 0, DeleteTickerSymbolName, false).
     			then(function (response) {
     				if (response.success) {
     					FlashService.Success('Deleted the Stock', true);

@@ -24,23 +24,31 @@
                          FlashService.Error(response.message);	
                      }
                  });
+             vm.dataLoading = false;
         }
 
         function register() {
             vm.dataLoading = true;
-            vm.user.QuestionId1 = vm.user.Question1.QuestionId;
-            vm.user.QuestionId2 = vm.user.Question2.QuestionId;
+            vm.user.QuestionId1 = vm.Question1.QuestionId;
+            vm.user.QuestionId2 = vm.Question2.QuestionId;
             UserService.RegisterUser(vm.user)
                 .then(function (response) {
                     if (response.success) {
-                        FlashService.Success('Registration successful', true);
-                        $location.path('/login');
+                    		console.log(response.data);
+                    		if (response.data === -1) {
+                    			FlashService.Error('A username is already present with the same name. Please enter another username', true);
+                    			vm.dataLoading = false;
+                    		} else {
+	                        FlashService.Success('Registration successful', true);
+	                        $location.path('/login');
+                    		}
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
                     }
                 });
         }
+        
     }
 
 })();

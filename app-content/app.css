@@ -69,3 +69,11 @@ th {
 tr:nth-child(odd){
   background-color: white;
 }
+.fabutton {
+  background: none;
+  padding: 0px;
+  border: none;
+}
+.hide{
+	display:hidden;
+}

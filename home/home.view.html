@@ -36,67 +36,82 @@
                 <thead>
                     <tr>
                         <th>
-                            Symbol
+                            Stock
                         </th>
                         <th>
-                            Price
+                            Regular Market Price
+                        </th>
+                        <th>
+                            Regular Market Change
+                        </th>
+                        <th>
+                            Regular Market Change Percent
+                        </th>
+                        <th>
+                            Post Market Time
+                        </th>
+                        <th>
+                            Previous Close
                         </th>
                         <th>
                             Open
                         </th>
                         <th>
-                            High
+                            52 Week Range
                         </th>
                         <th>
-                            Low
+                            Earnings Date
                         </th>
                         <th>
-                            Change
-                        </th>
-                        <th>
-                            %
-                        </th>
-                        <th>
-                            Action
+                            Delete
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="loading" ng-show="vm.tickerSymbols==0">
+                    <tr class="loading" ng-show="vm.UserTickerSymbols==0">
                         <td colspan="12">
                             loading...
                         </td>
                     </tr>
-                    <tr ng-repeat="stock in vm.tickerSymbols" >
+                    <tr ng-repeat="data in vm.UserTickerSymbols" >
                         <td>
-                            {{stock.ticker}}
+                            {{data.longName}} - {{data.ticker}}
                         </td>
                         <td>
-                            {{stock.regularMarketPrice | number:2}}
+                            {{data.regularMarketPrice | number:2}}
                         </td>
+                        <td>
+                            {{data.RegularMarketChange}}
+                        </td>
+                        <td>
+                            {{data.RegularMarketChangePercent}}
+                        </td>
+                        <td>
+                        		{{data.postMarketTime}}
+                        	</td>
+                        	<td>
+                        		{{data["Previous Close"]}}
+                        	</td>
                         <td>
                             {{stock.Open | number:2}}
                         </td>
                         <td>
-                            {{stock.dayHigh | number:2}}
-                        </td>
+                        		{{data["52 Week Range"]}}
+                        	</td>
+                        	<td>
+                        		{{data["Earnings Date"]}}
+                        	</td>
                         <td>
-                            {{stock.dayLow | number:2}}
-                        </td>
-                        <td>
-                            {{stock.RegularMarketChange}}
-                        </td>
-                        <td>
-                            {{stock.RegularMarketChangePercent}}
-                        </td>
-                        <td>
-                            <a ng-click="deleteTicker(stock.ticker)">Delete</a>
+                        		<form name="form" ng-submit="vm.deleteTickerSymbols(data.ticker)" role="form">
+							<button type="submit" class="fabutton">
+	                           		<i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+	                           	</button>
+                           	</form>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <h2>
 <p>&nbsp;</p>
 </div> 
 <form name="form" ng-submit="vm.addTickerSymbols()" role="form">
@@ -109,18 +124,6 @@
     </div>
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">Add</button>
-    </div>
-</form>
-<form name="form" ng-submit="vm.deleteTickerSymbols()" role="form">
-	<div class="form-group">
-		<label for="username">Stock</label>
-        <input type="text" name="Deletetickersymbol" id="deleteickerSymbol" class="form-control" ng-model="vm.DeleteTickerSymbolName" required />
-	</div>
-	<div class="form-group">
-        <input type="hidden" ng-model="vm.user.UserId"  value={{vm.user.UserId}} >
-    </div>
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Delete</button>
     </div>
 </form>
 <p>&nbsp;</p>

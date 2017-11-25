@@ -21,7 +21,7 @@
                     method: "POST", 
                     dataType: "json" ,  
                     data: {UserId: 0, UserName: username, Password: password},
-                    url: "http://13.92.135.96/FinancePortfolioAPI/api/User/ValidateUser",   
+                    url: "http://52.226.130.180/FinancePortfolioAPI/api/User/ValidateUser",   
                     }).then(success, error('Failed to get user by username'));
             }
         

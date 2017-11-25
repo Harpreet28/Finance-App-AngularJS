@@ -24,16 +24,16 @@
                 return $http({  
                     method: 'POST',
                     dataType:'json',
-                    url: "http://13.92.135.96/FinancePortfolioAPI/api/User/RegisterUser",
+                    url: "http://52.226.130.180/FinancePortfolioAPI/api/User/RegisterUser",
                     data: user, 
-                    }) .then(success, error('Failed to get user by username'));
+                    }) .then(success, error);
         }
         
         function GetSecurityQuestions(){
         		return $http({  
 	    			method: 'GET',
 	    			dataType:'json',
-	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/user/GetSecurityQuestions",
+	    			url: "http://52.226.130.180/FinancePortfolioAPI/api/user/GetSecurityQuestions",
 	    			}) .then(success, error('Failed to get security questions'));     	
         }
         
@@ -41,7 +41,7 @@
 	    		return $http({  
 	    			method: 'GET',
 	    			dataType:'json',
-	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/TickerSymbol/GetAllTickerSymbols"
+	    			url: "http://52.226.130.180/FinancePortfolioAPI/api/TickerSymbol/GetAllTickerSymbols"
 	    			}) .then(success, error('Failed to get user by username'));
 	    }
         
@@ -49,16 +49,17 @@
 	        	return $http({  
 	    			method: 'GET',
 	    			dataType:'json',
-	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/GetUserTickersDetails/" + userId
+	    			url: "http://52.226.130.180/FinancePortfolioAPI/api/User/GetUserTickersDetails/" + userId
 	    			}) .then(success, error('Failed to get ticker symbols for the user'));          
         }
 
         function UpdateTickerSymbols(userId, tickerSymbolId, tickerSymbolName, active) {
+        	console.log(tickerSymbolName);
 	        	return $http({  
 	    			method: 'POST',
 	    			dataType:'json',
 	    			data: [{ UserId: userId, TickerSymbolId: tickerSymbolId, TickerSymbolName: tickerSymbolName, Active: active }],
-	    			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/UpdateTickerSymbols" 
+	    			url: "http://52.226.130.180/FinancePortfolioAPI/api/User/UpdateTickerSymbols" 
 	    			}) .then(success, error('Failed to update ticker symbols for the user'));          
 	    }
         
@@ -66,7 +67,7 @@
         		return $http({  
         			method: 'GET',
         			dataType:'json',
-        			url: "http://13.92.135.96/FinancePortfolioAPI/api/user/GetUserDetailsByUserName/" + username
+        			url: "http://52.226.130.180/FinancePortfolioAPI/api/user/GetUserDetailsByUserName/" + username
         			}) .then(success, error('Failed to get user by username'));
         }
         
@@ -79,7 +80,7 @@
         function error(error) {
             return function () {
             	console.log("Error : " + error);
-                return { success: false, message: error };
+                return { success: false, message: error.data };
             };
         }
     }
