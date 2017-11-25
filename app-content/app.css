@@ -10,21 +10,27 @@ body {
     font-size: 16px;
     background-color: transparent;
 }
-a {
+a, a:hover{
     cursor: pointer;
-}
-.form-text {
-	font-weight:bold;
-	font-size:10px;
+    text-decoration:none;
 }
 .span12{
 	text-align: center;
 }
-.alert-danger {
-    background-color: #f2dede !important;
-    border-color: #ebccd1 !important; 
+.error-message {
     color: #cc0052;
 }
+.success-message {
+    color: #008000;
+}
+.btnLink {
+	color: #000 !important;
+}
+.btnWidth{
+	width: 100%;
+	border: 1px solid #cc0052 !important;
+}
+
 /**Login Page styling **/
 
 .login-container {
@@ -88,13 +94,55 @@ a {
   margin-left: 35%;
   font-size: 14px;
 }
-.btnWidth{
-	width: 100%;
+
+/** Account Help Page Styling **/
+.accountHelp-container {
+  width: 500px;
+  height: 400px;
+  margin: 150px auto;
 }
-.registerBtnLink {
-	color: #000 !important;
+.accountHelp {
+	padding: 30px 30px 120px 30px;
+    border: 1px solid #cc0052;
+    border-radius: 8px;
 }
+#password {
+	margin-bottom:20px;
+	background-color: #fff;
+}
+form[name="accountHelpform"] button[type="submit"]{
+	margin-bottom:10px;
+}
+
 /* Registration Page Styling **/
+.register-container {
+  width: 800px;
+  height: 400px;
+  margin: 150px auto;
+}
+.register {
+	padding: 30px 30px 60px 30px;
+    border: 1px solid #cc0052;
+    border-radius: 8px;
+}
+#parent_div {
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+  margin-right: 10px;
+  float: left;
+}
+.side_div {
+  float: left;
+  width: 45%;
+}
+.side_div_first{
+  margin-right: 10%;
+}
+form[name="registrationform"] button[type="submit"]{
+	margin-bottom:10px;
+}
+/** Home page styling **/
 #stockTable table {
     border-collapse: collapse;
 }

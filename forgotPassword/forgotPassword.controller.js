@@ -20,6 +20,7 @@
                 .then(function (response) {
                     if (response.success) {
                     		if (response.data.UserId != 0) {
+                    			console.log(response.data);
 	                    		vm.user.question1 = response.data.Question1;
 	                    		vm.user.question2 = response.data.Question2;
 	                    		angular.element(document.querySelector("#userNameContainer")).removeClass("ng-show");
