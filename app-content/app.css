@@ -1,21 +1,97 @@
-﻿a {
+﻿html {
+  font-family: "Tenor Sans", sans-serif;
+  background-image: url("../Images/stock.jpg"); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+body {
+    font-size: 16px;
+    background-color: transparent;
+}
+a {
     cursor: pointer;
 }
 .form-text {
 	font-weight:bold;
 	font-size:10px;
 }
-.left-padding{
-	padding-left:0;
-}
-body {
-    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-    font-size: 16px;
-}
-
 .span12{
 	text-align: center;
 }
+/**Login Page styling **/
+
+.login-container {
+  width: 500px;
+  height: 400px;
+  margin: 150px auto;
+  border: 1px solid #cc0052;
+  border-radius: 8px;
+}
+.login {
+  margin:60px;
+  
+}
+.login-heading {
+  font: 1.8em/48px "Tenor Sans", sans-serif;
+  color: black;
+}
+.input-txt {
+  width: 100%;
+  padding: 20px 10px;
+  background: transparent !important;
+  border: none;
+  font-size: 1em;
+  color: #404040;
+  border-bottom: 1px solid #cc0052;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition: background-color 0.5s ease-in-out;
+  -o-transition: background-color 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
+}
+.input-txt:-moz-placeholder {
+  color: #404040;
+}
+.input-txt:-ms-input-placeholder {
+  color: #404040;
+}
+.input-txt::-webkit-input-placeholder {
+  color: #404040;
+}
+.input-txt:focus {
+  background-color: #000;
+}
+.login-footer {
+  margin: 10px 0;
+  overlow: hidden;
+  float: left;
+  width: 100%;
+}
+.btn {
+  padding: 15px 30px;
+  border: none;
+  background: white;
+  color: #000;
+  opacity: .85 !important;
+}
+.form-link, .form-link:hover{
+  line-height: 3em;
+  color: #000 !important;
+  text-decoration: none;
+  margin-left: 35%;
+  font-size: 14px;
+}
+.btnWidth{
+	width: 100%;
+}
+.registerBtnLink {
+	color: #000 !important;
+}
+/* Registration Page Styling **/
 #stockTable table {
     border-collapse: collapse;
 }
