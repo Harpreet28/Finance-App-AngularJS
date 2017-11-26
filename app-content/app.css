@@ -13,6 +13,7 @@ body {
 a, a:hover{
     cursor: pointer;
     text-decoration:none;
+    display:block;
 }
 .span12{
 	text-align: center;
