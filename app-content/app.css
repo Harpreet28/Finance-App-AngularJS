@@ -139,6 +139,9 @@ form[name="accountHelpform"] button[type="submit"]{
 .side_div_first{
   margin-right: 10%;
 }
+.clearFloat{
+	clear:both;
+}
 form[name="registrationform"] button[type="submit"]{
 	margin-bottom:10px;
 }

@@ -3,16 +3,24 @@
 		<div class="register">
 		    <h2>Register</h2>
 		    <form name="registrationform" ng-submit="vm.register()" role="form">
-		        <div class="form-group side_div side_div_first" ng-class="{ 'has-error': registrationform.username.$dirty && registrationform.username.$error.required }">
+		        <div class="form-group" ng-class="{ 'has-error': registrationform.username.$dirty && registrationform.username.$error.required }">
 		            <label for="username">Username</label>
 		            <input type="text" name="username" id="username" class="form-control" ng-model="vm.user.UserName" required />
 		            <span ng-show="registrationform.username.$dirty && registrationform.username.$error.required" class="help-block">Username is required</span>
 		        </div>
-		        <div class="form-group side_div" ng-class="{ 'has-error': registrationform.password.$dirty && registrationform.password.$error.required }">
+		        <div class="form-group side_div side_div_first" ng-class="{ 'has-error': registrationform.password.$dirty && registrationform.password.$error.required }">
 		            <label for="password">Password</label>
 		            <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.Password" required />
 		            <span ng-show="registrationform.password.$dirty && registrationform.password.$error.required" class="help-block">Password is required</span>
 		        </div>
+		        <div class="form-group side_div" ng-class="{ 'has-error': registrationform.password.$dirty && registrationform.password.$error.required }">
+		            <label for="password">Confirm Password</label>
+		            <input type="password" name="confirmpassword" id="confirmpassword" class="form-control" ng-model="vm.confirmPassword" required />
+		            <span ng-show="registrationform.confirmpassword.$dirty && registrationform.confirmpassword.$error.required" class="help-block">Password is required</span>
+			        <div class="clearFloat" ng-class="{ 'has-error': vm.user.Password !== vm.confirmPassword }" ng-show="registrationform.confirmpassword.$touched">
+						<span ng-show="vm.user.Password !== vm.confirmPassword" class="help-block">Password mismatch</span>
+				    </div>
+			    </div>
 			    <div class="form-group side_div side_div_first" ng-class="{ 'has-error': registrationform.firstName.$dirty && registrationform.firstName.$error.required }">
 			    		<label for="username">First name</label>
 			        <input type="text" name="firstName" id="firstName"  class="form-control" ng-model="vm.user.FirstName" required />
@@ -25,18 +33,18 @@
 			    </div>
 		        <div class="form-group side_div side_div_first" ng-class="{ 'has-error': (registrationform.dob.$dirty && registrationform.dob.$error.required) || (registrationform.dob.$dirty && registrationform.dob.$error.pattern)}">
 		            <label for="dob">Date Of Birth</label>
-		            <input type="text" name="dob" id="dob" class="form-control" ng-model="vm.user.DOB" ng-pattern="/^(0[1-9]|1[012])\/(0[1-9]|1[0-9]|2[0-9]|3[01])\/(1[6-9][0-9][0-9])$/i"  required/>
+		            <input type="text" name="dob" id="dob" class="form-control" placeholder="MM/DD/YYYY" ng-model="vm.user.DOB" ng-pattern="/^(0[1-9]|1[012])\/(0[1-9]|1[0-9]|2[0-9]|3[01])\/(1[6-9][0-9][0-9])$/i"  required/>
 		          	<span ng-show="registrationform.dob.$dirty && registrationform.dob.$error.required" class="help-block">Date of birth is required</span>
-		            <span ng-show="registrationform.dob.$dirty && registrationform.dob.$error.pattern" class="help-block">Please enter correct date format MM/DD/YYYY</span>
+		            <span ng-show="registrationform.dob.$touched && registrationform.dob.$error.pattern" class="help-block">Please enter correct date format MM/DD/YYYY</span>
 		        </div>
 		        <div class="form-group side_div" ng-class="{ 'has-error': (registrationform.email.$dirty && registrationform.email.$error.required)  || (registrationform.email.$dirty && registrationform.email.$error.pattern)}">
 		            <label for="email">Email</label>
-		            <input type="text" name="email" id="email" class="form-control" ng-model="vm.user.EmailAddress" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />
+		            <input type="text" name="email" id="email" class="form-control" placeholder="name@example.com" ng-model="vm.user.EmailAddress" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />
 		            <span ng-show="registrationform.email.$dirty && registrationform.email.$error.required" class="help-block">Email is required</span>
-		            <span ng-show="registrationform.email.$dirty && registrationform.email.$error.pattern" class="help-block">Please enter a valid email</span>
+		            <span ng-show="registrationform.email.$touched && registrationform.email.$error.pattern" class="help-block">Please enter a valid email</span>
 		        </div>
-		        <div class="form-group" ng-class="{ 'has-error': registrationform.address.$dirty && registrationform.address.$error.required }">
-		            <label for="dob">Address</label>
+		        <div class="form-group clearFloat" ng-class="{ 'has-error': registrationform.address.$dirty && registrationform.address.$error.required }">
+		            <label for="address">Address</label>
 		            <input type="text" name="address" id="address" class="form-control" ng-model="vm.user.Address" required />
 		            <span ng-show="registrationform.address.$dirty && registrationform.address.$error.required" class="help-block">Address is required</span>
 		        </div>
@@ -64,7 +72,7 @@
 		        	</div>
 		         <div ng-class="{ 'alert': flash, 'success-message': flash.type === 'success', 'error-message': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 				<div class="form-actions">
-		            <button type="submit" ng-disabled="registrationform.$invalid || vm.dataLoading"  class="btn btnWidth">Register</button>
+		            <button type="submit" ng-disabled="registrationform.$invalid || vm.dataLoading || vm.user.Password !== vm.confirmPassword "  class="btn btnWidth">Register</button>
 		            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 		            <a href="#!/login" class="btn btnLink btnWidth">Cancel</a>
 		        </div>
