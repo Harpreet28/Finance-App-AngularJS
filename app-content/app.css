@@ -1,0 +1,210 @@
+﻿html {
+  font-family: "Tenor Sans", sans-serif;
+  background-image: url("../Images/stock.jpg"); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+body {
+    font-size: 16px;
+    background-color: transparent;
+}
+a, a:hover{
+    cursor: pointer;
+    text-decoration:none;
+    display:block;
+}
+.span12{
+  text-align: center;
+}
+.error-message {
+    color: #cc0052;
+}
+.success-message {
+    color: #008000;
+}
+.btnLink {
+  color: #000 !important;
+}
+.btnWidth{
+  width: 100%;
+  border: 1px solid #cc0052 !important;
+}
+
+/**Login Page styling **/
+
+.login-container {
+  width: 500px;
+  height: 400px;
+  margin: 150px auto;
+}
+.login {
+  padding: 60px;
+    border: 1px solid #cc0052;
+    border-radius: 8px;
+}
+.login-heading {
+  font: 1.8em/48px "Tenor Sans", sans-serif;
+  color: black;
+}
+.input-txt {
+  width: 100%;
+  padding: 20px 10px;
+  background: transparent !important;
+  border: none;
+  font-size: 1em;
+  color: #404040;
+  border-bottom: 1px solid #cc0052;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition: background-color 0.5s ease-in-out;
+  -o-transition: background-color 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
+}
+.input-txt:-moz-placeholder {
+  color: #404040;
+}
+.input-txt:-ms-input-placeholder {
+  color: #404040;
+}
+.input-txt::-webkit-input-placeholder {
+  color: #404040;
+}
+.input-txt:focus {
+  background-color: #000;
+}
+.login-footer {
+  margin: 10px 0;
+  overlow: hidden;
+  float: left;
+  width: 100%;
+}
+.btn {
+  padding: 15px 30px;
+  border: none;
+  background: white;
+  color: #000;
+}
+.form-link, .form-link:hover{
+  line-height: 3em;
+  color: #000 !important;
+  text-decoration: none;
+  margin-left: 35%;
+  font-size: 14px;
+}
+
+/** Account Help Page Styling **/
+.accountHelp-container {
+  width: 500px;
+  height: 400px;
+  margin: 150px auto;
+}
+.accountHelp {
+  padding: 30px 30px 120px 30px;
+    border: 1px solid #cc0052;
+    border-radius: 8px;
+}
+#password {
+  margin-bottom:20px;
+  background-color: #fff;
+}
+form[name="accountHelpform"] button[type="submit"]{
+  margin-bottom:10px;
+}
+
+/* Registration Page Styling **/
+.register-container {
+  width: 800px;
+  height: 400px;
+  margin: 150px auto;
+}
+.register {
+  padding: 30px 30px 60px 30px;
+    border: 1px solid #cc0052;
+    border-radius: 8px;
+}
+#parent_div {
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+  margin-right: 10px;
+  float: left;
+}
+.side_div {
+  float: left;
+  width: 45%;
+}
+.side_div_first{
+  margin-right: 10%;
+}
+.clearFloat{
+  clear:both;
+}
+form[name="registrationform"] button[type="submit"]{
+  margin-bottom:10px;
+}
+/** Home page styling **/
+#stockTable table {
+    border-collapse: collapse;
+}
+
+#stockTable table th, #stockTable table td {
+    padding: 10px 20px;
+}
+
+#stockTable table td {
+    text-align: right;
+}
+
+#stockTable .loading td {
+    text-align: left;
+}
+
+#stockTicker {
+    overflow: hidden;
+    width: 100%;
+    height: 24px;
+    border: 1px solid #999;
+}
+
+#stockTicker .inner {
+    width: 100%;
+}
+
+#stockTicker ul {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#stockTicker li {
+    display: inline-block;
+    margin-right: 8px;   
+}
+
+#stockTicker .symbol {
+    font-weight: bold;
+}
+
+#stockTicker .change {
+    font-style: italic;
+
+}
+th {
+  background-color: yellow;
+}
+tr:nth-child(odd){
+  background-color: white;
+}
+.fabutton {
+  background: none;
+  padding: 0px;
+  border: none;
+}
+.hide{
+  display:hidden;
+}

@@ -1,0 +1,126 @@
+﻿<div class="container span12">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Fp</a>
+        </div>
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+               <li><a href="#">Settings</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/login">Logout</a></li>
+            </ul>
+        </div>
+    </nav>                         
+<h2>Hi {{vm.user.firstName}}!</h2>
+<h3>Welcome to your finance portfolio!!</h3>
+<br>
+       <div id="stockTable">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>
+                            Stock
+                        </th>
+                        <th>
+                            Regular Market Price
+                        </th>
+                        <th>
+                            Regular Market Change
+                        </th>
+                        <th>
+                            Regular Market Change Percent
+                        </th>
+                        <th>
+                            Post Market Time
+                        </th>
+                        <th>
+                            Previous Close
+                        </th>
+                        <th>
+                            Open
+                        </th>
+                        <th>
+                            52 Week Range
+                        </th>
+                        <th>
+                            Earnings Date
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="loading" ng-show="vm.UserTickerSymbols==0">
+                        <td colspan="12">
+                            loading...
+                        </td>
+                    </tr>
+                    <tr ng-repeat="data in vm.UserTickerSymbols" >
+                        <td>
+                            {{data.longName}} - {{data.ticker}}
+                        </td>
+                        <td>
+                            {{data.regularMarketPrice | number:2}}
+                        </td>
+                        <td>
+                            {{data.RegularMarketChange | number:2}}
+                        </td>
+                        <td>
+                            {{data.RegularMarketChangePercent | number:2}}%
+                        </td>
+                        <td>
+                            {{data.postMarketTime}}
+                        </td>
+                        <td>
+                            {{data.Open | number:2}}
+                        </td>
+                        <td>
+                            {{data.Open | number:2}}
+                        </td>
+                        <td>
+                            {{data["52 Week Range"]}}
+                        </td>
+                        <td>
+                            {{data["Earnings Date"]}}
+                        </td>
+                        <td>
+                                <form name="form" ng-submit="vm.deleteTickerSymbols(data.ticker)" role="form">
+                            <button type="submit" class="fabutton">
+                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                 <tr>
+                    <form name="form"  role="form">
+                        <div class="form-group">
+                            <input placeholder="Please enter a ticker name to add it to your portfolio" type="search" name="Addtickersymbol" id="addTickerSymbol" class="form-control" ng-model="vm.AddTickerSymbolName" required />
+                            <div class="list-group" id="myList" ng-click="vm.setInputValue(result)" ng-if="vm.AddTickerSymbolName" ng-repeat="result in vm.tickerSymbols | filter : vm.AddTickerSymbolName">
+                                <a class="list-group-item" href="" >{{result.ticker}}</a>
+                            </div>  
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" ng-model="vm.user.UserId"  value={{vm.user.UserId}} >
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn btn-lg btn-block btn btn-primary" ng-disabled = "!vm.AddTickerSymbolName"ng-click="vm.addTickerSymbols()" >Add New Ticker</button>
+                        </div>
+                    </form>
+                </tr>
+                <br><br>
+                </tfoot>
+            </table>
+        </div>
+</div> 
