@@ -15,14 +15,6 @@
                 <li><a href="#">Profile</a></li>
                <li><a href="#">Settings</a></li>
             </ul>
-            <form class="navbar-form navbar-left">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                    </span>
-                </div>
-            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!/login">Logout</a></li>
             </ul>
@@ -81,50 +73,54 @@
                             {{data.regularMarketPrice | number:2}}
                         </td>
                         <td>
-                            {{data.RegularMarketChange}}
+                            {{data.RegularMarketChange | number:2}}
                         </td>
                         <td>
-                            {{data.RegularMarketChangePercent}}
+                            {{data.RegularMarketChangePercent | number:2}}%
                         </td>
                         <td>
-                        		{{data.postMarketTime}}
-                        	</td>
-                        	<td>
-                        		{{data["Previous Close"]}}
-                        	</td>
-                        <td>
-                            {{stock.Open | number:2}}
+                            {{data.postMarketTime}}
                         </td>
                         <td>
-                        		{{data["52 Week Range"]}}
-                        	</td>
-                        	<td>
-                        		{{data["Earnings Date"]}}
-                        	</td>
+                            {{data.Open | number:2}}
+                        </td>
                         <td>
-                        		<form name="form" ng-submit="vm.deleteTickerSymbols(data.ticker)" role="form">
-							<button type="submit" class="fabutton">
-	                           		<i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-	                           	</button>
-                           	</form>
+                            {{data.Open | number:2}}
+                        </td>
+                        <td>
+                            {{data["52 Week Range"]}}
+                        </td>
+                        <td>
+                            {{data["Earnings Date"]}}
+                        </td>
+                        <td>
+                                <form name="form" ng-submit="vm.deleteTickerSymbols(data.ticker)" role="form">
+                            <button type="submit" class="fabutton">
+                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
+                <tfoot>
+                 <tr>
+                    <form name="form"  role="form">
+                        <div class="form-group">
+                            <input placeholder="Please enter a ticker name to add it to your portfolio" type="search" name="Addtickersymbol" id="addTickerSymbol" class="form-control" ng-model="vm.AddTickerSymbolName" required />
+                            <div class="list-group" id="myList" ng-click="vm.setInputValue(result)" ng-if="vm.AddTickerSymbolName" ng-repeat="result in vm.tickerSymbols | filter : vm.AddTickerSymbolName">
+                                <a class="list-group-item" href="" >{{result.ticker}}</a>
+                            </div>  
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" ng-model="vm.user.UserId"  value={{vm.user.UserId}} >
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn btn-lg btn-block btn btn-primary" ng-disabled = "!vm.AddTickerSymbolName"ng-click="vm.addTickerSymbols()" >Add New Ticker</button>
+                        </div>
+                    </form>
+                </tr>
+                <br><br>
+                </tfoot>
             </table>
         </div>
-<p>&nbsp;</p>
 </div> 
-<form name="form" ng-submit="vm.addTickerSymbols()" role="form">
-	<div class="form-group">
-		<label for="username">Stock</label>
-        <input type="text" name="Addtickersymbol" id="addTickerSymbol" class="form-control" ng-model="vm.AddTickerSymbolName" required />
-	</div>
-	<div class="form-group">
-        	<input type="hidden" ng-model="vm.user.UserId"  value={{vm.user.UserId}} >
-    </div>
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Add</button>
-    </div>
-</form>
-<p>&nbsp;</p>
-<p><a href="#!/login" class="btn btn-primary">Logout</a></p>

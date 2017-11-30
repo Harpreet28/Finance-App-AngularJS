@@ -146,13 +146,14 @@ form[name="accountHelpform"] button[type="submit"]{
 form[name="registrationform"] button[type="submit"]{
 	margin-bottom:10px;
 }
+
 /** Home page styling **/
 #stockTable table {
     border-collapse: collapse;
 }
 
 #stockTable table th, #stockTable table td {
-    padding: 15px 32px;
+    padding: 10px 20px;
 }
 
 #stockTable table td {
@@ -206,5 +207,5 @@ tr:nth-child(odd){
   border: none;
 }
 .hide{
-	display:hidden;
+  display:hidden;
 }
