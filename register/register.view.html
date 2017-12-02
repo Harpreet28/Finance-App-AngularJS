@@ -39,7 +39,7 @@
 		        </div>
 		        <div class="form-group side_div" ng-class="{ 'has-error': (registrationform.email.$dirty && registrationform.email.$error.required)  || (registrationform.email.$dirty && registrationform.email.$error.pattern)}">
 		            <label for="email">Email</label>
-		            <input type="text" name="email" id="email" class="form-control" placeholder="name@example.com" ng-model="vm.user.EmailAddress" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />
+		            		            <input type="text" name="email" id="email" class="form-control" placeholder="name@example.com" ng-model="vm.user.EmailAddress" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+(\.[a-z.]{2,3}){1,2}$/" required />
 		            <span ng-show="registrationform.email.$dirty && registrationform.email.$error.required" class="help-block">Email is required</span>
 		            <span ng-show="registrationform.email.$touched && registrationform.email.$error.pattern" class="help-block">Please enter a valid email</span>
 		        </div>
