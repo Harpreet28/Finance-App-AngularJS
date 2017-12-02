@@ -18,6 +18,7 @@
         
 
         function login() {
+        		FlashService.deleteFlashMessage();
             vm.dataLoading = true;
             AuthenticationService.Login(vm.username, vm.password)
 	            .then(function (response) {

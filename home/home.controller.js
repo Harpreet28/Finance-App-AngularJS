@@ -70,7 +70,6 @@
                 UserService.UpdateTickerSymbols(vm.user.UserId, 0, vm.AddTickerSymbolName, true).
                     then(function (response) {
                         if (response.success) {
-                            FlashService.Success('Added new Stock', true);
                             $route.reload();
                         } else {
                             FlashService.Error(response.message);
@@ -83,7 +82,6 @@
             UserService.UpdateTickerSymbols(vm.user.UserId, 0, DeleteTickerSymbolName, false).
                 then(function (response) {
                     if (response.success) {
-                        FlashService.Success('Deleted the Stock', true);
                         $route.reload();
                     } else {
                         FlashService.Error(response.message);
