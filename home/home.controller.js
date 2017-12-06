@@ -5,8 +5,8 @@
         .module('app')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['UserService', '$rootScope', 'FlashService', '$location', '$route'];
-    function HomeController(UserService, $rootScope, FlashService, $location, $route) {
+    HomeController.$inject = ['UserService', '$rootScope', 'FlashService', '$location', '$route', '$filter'];
+    function HomeController(UserService, $rootScope, FlashService, $location, $route, $filter) {
         var vm = this;
 
         vm.user = null;
@@ -14,17 +14,32 @@
         vm.addTickerSymbols = addTickerSymbols;
         vm.deleteTickerSymbols = deleteTickerSymbols;
         vm.setInputValue = setInputValue;
+        vm.sort_by = sort_by;
 
         initController();
 
         function initController() {
             console.log("Home Controller - Init Controller");
+            vm.sortingOrder = 'longName';
+            vm.pageSizes = [5,10,25,50];
+            vm.reverse = false;
+            vm.itemsPerPage = 10;
             getAllTickerSymbols();
         }
 
-        function setInputValue(result) {
+        function setInputValue(result){
             vm.AddTickerSymbolName = result.ticker;
         }
+     
+      
+      // change sorting order
+      function sort_by(newSortingOrder){
+        if (vm.sortingOrder == newSortingOrder){
+          vm.reverse = !vm.reverse;
+        }else{
+            vm.sortingOrder = newSortingOrder;
+        }  
+      }
 
         function getAllTickerSymbols(){
                 console.log("Home Controller - Get All Ticker Symbols ");
