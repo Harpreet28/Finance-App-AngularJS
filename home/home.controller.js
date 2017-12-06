@@ -73,6 +73,12 @@
                 .then(function (response) {
                     if (response.success) {
                             vm.UserTickerSymbols = response.data;
+                            if(vm.UserTickerSymbols){
+                                angular.forEach(vm.UserTickerSymbols, function (ticker) {
+                                    ticker.regularMarketPrice = parseFloat(ticker.regularMarketPrice);
+                                    ticker.RegularMarketChange = parseFloat(ticker.RegularMarketChange);
+                                });
+                            }
                             console.log(vm.UserTickerSymbols);
                     } else {
                             FlashService.Error(response.message);
