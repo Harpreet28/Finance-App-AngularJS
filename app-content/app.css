@@ -1,6 +1,6 @@
 ﻿html {
   font-family: "Tenor Sans", sans-serif;
-  background-image: url("../Images/stock.jpg"); 
+  background-image: url("../Images/stock.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -16,7 +16,7 @@ a, a:hover{
     display:block;
 }
 .span12{
-	text-align: center;
+  text-align: center;
 }
 .error-message {
     color: #cc0052;
@@ -25,11 +25,11 @@ a, a:hover{
     color: #008000;
 }
 .btnLink {
-	color: #000 !important;
+  color: #000 !important;
 }
 .btnWidth{
-	width: 100%;
-	border: 1px solid #cc0052 !important;
+  width: 100%;
+  border: 1px solid #cc0052 !important;
 }
 
 /**Login Page styling **/
@@ -40,7 +40,7 @@ a, a:hover{
   margin: 150px auto;
 }
 .login {
-	padding: 60px;
+  padding: 60px;
     border: 1px solid #cc0052;
     border-radius: 8px;
 }
@@ -103,16 +103,16 @@ a, a:hover{
   margin: 150px auto;
 }
 .accountHelp {
-	padding: 30px 30px 120px 30px;
+  padding: 30px 30px 120px 30px;
     border: 1px solid #cc0052;
     border-radius: 8px;
 }
 #password {
-	margin-bottom:20px;
-	background-color: #fff;
+  margin-bottom:20px;
+  background-color: #fff;
 }
 form[name="accountHelpform"] button[type="submit"]{
-	margin-bottom:10px;
+  margin-bottom:10px;
 }
 
 /* Registration Page Styling **/
@@ -122,7 +122,7 @@ form[name="accountHelpform"] button[type="submit"]{
   margin: 150px auto;
 }
 .register {
-	padding: 30px 30px 60px 30px;
+  padding: 30px 30px 60px 30px;
     border: 1px solid #cc0052;
     border-radius: 8px;
 }
@@ -141,26 +141,33 @@ form[name="accountHelpform"] button[type="submit"]{
   margin-right: 10%;
 }
 .clearFloat{
-	clear:both;
+  clear:both;
 }
 form[name="registrationform"] button[type="submit"]{
-	margin-bottom:10px;
+  margin-bottom:10px;
 }
 
 /** Home page styling **/
-#stockTable table {
+#myTable table {
     border-collapse: collapse;
 }
 
-#stockTable table th, #stockTable table td {
-    padding: 10px 20px;
+#myTable td, #myTable td {
+    padding: 15px 20px;
+}
+#myTable th {
+  padding: 17px 20px;
+  text-align: center;
 }
 
-#stockTable table td {
-    text-align: right;
+#myTable td {
+  text-align: center;
+}
+#myTable tr {
+    text-align: center;
 }
 
-#stockTable .loading td {
+#myTable .loading td {
     text-align: left;
 }
 
@@ -195,11 +202,16 @@ form[name="registrationform"] button[type="submit"]{
     font-style: italic;
 
 }
-th {
-  background-color: yellow;
-}
 tr:nth-child(odd){
   background-color: white;
+}
+tr:nth-child(even){
+  background-color: white;
+}
+.table .thead-dark th {
+  color: #fff;
+  background-color: #212529;
+  border-color: #32383e;
 }
 .fabutton {
   background: none;
@@ -208,4 +220,15 @@ tr:nth-child(odd){
 }
 .hide{
   display:hidden;
+}
+.inputStyle {
+  width: 100%;
+  padding: 0.5em 0.5em;
+  font-size: 1.2em;
+  border-radius: 3px;
+  border: 1px solid #D9D9D9;
+  height: 50px !important;
+}
+hr {
+  border-top: 3px solid #8c8b8b;
 }

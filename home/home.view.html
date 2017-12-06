@@ -1,5 +1,5 @@
-﻿<div class="container span12">
-   <nav class="navbar navbar-inverse">
+﻿<div class="container">
+<nav class="navbar navbar-inverse">
         <div class="navbar-header">
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
                 <span class="sr-only">Toggle navigation</span>
@@ -18,106 +18,81 @@
                 <li><a href="#!/login">Logout</a></li>
             </ul>
         </div>
-    </nav>                         
-<h2>Hi {{vm.user.UserName}}!</h2>
-<h3>Welcome to your finance portfolio!!</h3>
-<br>
-       <div id="stockTable">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>
-                            Stock
-                        </th>
-                        <th>
-                            Regular Market Price
-                        </th>
-                        <th>
-                            Regular Market Change
-                        </th>
-                        <th>
-                            Regular Market Change Percent
-                        </th>
-                        <th>
-                            Post Market Time
-                        </th>
-                        <th>
-                            Previous Close
-                        </th>
-                        <th>
-                            Open
-                        </th>
-                        <th>
-                            52 Week Range
-                        </th>
-                        <th>
-                            Earnings Date
-                        </th>
-                        <th>
-                            Delete
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="loading" ng-show="vm.UserTickerSymbols==0">
-                        <td colspan="12">
-                            loading...
-                        </td>
-                    </tr>
-                    <tr ng-repeat="data in vm.UserTickerSymbols" >
-                        <td>
-                            {{data.longName}} - {{data.ticker}}
-                        </td>
-                        <td>
-                            {{data.regularMarketPrice | number:2}}
-                        </td>
-                        <td>
-                            {{data.RegularMarketChange | number:2}}
-                        </td>
-                        <td>
-                           {{data.RegularMarketChangePercent}}
-                        </td>
-                        <td>
-                            {{data.postMarketTime}}
-                        </td>
-                        <td>
-                            {{data["Previous Close"]}}
-                        </td>
-                        <td>
-                            {{data.Open | number:2}}
-                        </td>
-                        <td>
-                            {{data["52 Week Range"]}}
-                        </td>
-                        <td>
-                            {{data["Earnings Date"]}}
-                        </td>
-                        <td>
-                                <form name="form" ng-submit="vm.deleteTickerSymbols(data.ticker)" role="form">
-                            <button type="submit" class="fabutton">
-                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                 <tr>
-                    <div class="dropdown dropdown-scroll">
-                        <div>
-                            <input placeholder="Please enter a ticker name to add it to your portfolio" type="search" name="Addtickersymbol" id="addTickerSymbol" list="myList" class="form-control" ng-model="vm.AddTickerSymbolName" required />
-                        </div>
-                        <datalist id="myList">
-                            <option ng-click="vm.setInputValue(result)" ng-repeat="result in vm.tickerSymbols | filter : vm.AddTickerSymbolName" value={{result.ticker}}></option>
-                        </datalist>  
-                        <br><br>
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary btn btn-lg btn-block btn btn-primary" ng-disabled = "!vm.AddTickerSymbolName"ng-click="vm.addTickerSymbols()" >Add New Ticker</button>
-                        </div>
-                    </div>
-                </tr>
-                <br><br>
-                </tfoot>
-            </table>
+    </nav>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="input-group">
+                <input placeholder="Please enter a ticker name to add it to your portfolio" type="text" name="Addtickersymbol" id="addTickerSymbol" list="myList" class="form-control dropdown dropdown-scroll inputStyle" ng-model="vm.AddTickerSymbolName">
+                <datalist id="myList" class="dataListWidth">
+                    <option ng-click="vm.setInputValue(result)" ng-repeat="result in vm.tickerSymbols | filter : vm.AddTickerSymbolName" value={{result.ticker}}></option>
+                </datalist>  
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-lg active" ng-disabled = "!vm.AddTickerSymbolName" ng-click="vm.addTickerSymbols()" >Add New Ticker</button>
+                </span>
+            </div>
         </div>
-</div> 
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="input-group input-group-lg add-on">
+          <input type="text" class="form-control search-query pull-right" ng-model="vm.search" placeholder="Search">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-3">
+        <select class="form-control input-lg pull-right" ng-model="vm.itemsPerPage" ng-change="vm.perPage()" ng-options="('show '+size+' per page') for size in vm.pageSizes"></select>
+      </div>
+    </div>
+    <br>
+    <table class="table table-striped table-hover" id="myTable">
+      <tbody>
+        <thead class="thead-dark">
+        <tr>
+        <th class="description" title="non-sortable">#</th>
+        <th class="name"><a ng-click="vm.sort_by('longName')">Stock <i class="fa fa-sort"></i></a></th>
+        <th class="name"><a ng-click="vm.sort_by('regularMarketPrice')">Price <i class="fa fa-sort"></i></a></th>
+        <th class="name"><a ng-click="vm.sort_by('RegularMarketChange')">Change <i class="fa fa-sort"></i></a></th>
+        <th class="description" title="non-sortable">Change Percent</th>
+        <th class="description" title="non-sortable">Previous Close </th>
+        <th class="description" title="non-sortable">Open</th>
+        <th class="description" title="non-sortable">Delete</th>
+      </tr>
+      </thead>
+        <tr data-dir-paginate-start="data in vm.UserTickerSymbols | orderBy:vm.sortingOrder:vm.reverse | filter:vm.search | itemsPerPage: vm.itemsPerPage" ng-init="vm.isToggled[$index] = false" ng-click="vm.isToggled[$index] = !vm.isToggled[$index]" style="cursor:pointer;">
+          <th scope="row">{{$index + 1}}</th>
+          <td>{{data.longName}}</td>
+          <td>{{data.regularMarketPrice | number:2}}</td>
+          <td>{{data.RegularMarketChange | number:2}}</td>
+          <td>{{data.RegularMarketChangePercent}}</tdßß>
+          <td>{{data["Previous Close"]}}</td>
+          <td>{{data.Open | number:2}}</td>
+          <td>
+            <button type="submit" ng-click="vm.deleteTickerSymbols(data.ticker)" class="fabutton">
+                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+            </button>
+         </td>
+        </tr>
+        <tr data-dir-paginate-end ng-if="vm.isToggled[$index]" id="{{data.TickerSymbolId}}">
+            <td colspan="9">
+                Hidden row for {{data.ticker}}
+            </td>
+        </tr>
+      </tbody>
+      <tfoot>
+    </tfoot>
+    </table>
+     <dir-pagination-controls
+       max-size="5"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+    <hr>
+</div>

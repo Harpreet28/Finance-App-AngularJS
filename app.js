@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies'])
+        .module('app', ['ngRoute', 'ngCookies', 'angularUtils.directives.dirPagination'])
         .config(config)
         .run(run);
 
