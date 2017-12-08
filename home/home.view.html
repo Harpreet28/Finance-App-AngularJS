@@ -57,32 +57,58 @@
         <thead class="thead-dark">
         <tr>
         <th class="description" title="non-sortable">#</th>
-        <th class="name"><a ng-click="vm.sort_by('longName')">Stock <i class="fa fa-sort"></i></a></th>
-        <th class="name"><a ng-click="vm.sort_by('regularMarketPrice')">Price <i class="fa fa-sort"></i></a></th>
-        <th class="name"><a ng-click="vm.sort_by('RegularMarketChange')">Change <i class="fa fa-sort"></i></a></th>
-        <th class="description" title="non-sortable">Change Percent</th>
-        <th class="description" title="non-sortable">Previous Close </th>
-        <th class="description" title="non-sortable">Open</th>
+        <th class="description"><a ng-click="vm.sort_by('longName')">Name <i class="fa fa-sort"></i></a></th>
+        <th class="description"><a ng-click="vm.sort_by('ticker')">Ticker <i class="fa fa-sort"></i></a></th>
+        <th class="description"><a ng-click="vm.sort_by('Market Cap')">Market Cap <i class="fa fa-sort"></i></a></th>
+        <th class="description"><a ng-click="vm.sort_by('regularMarketPrice')">Price <i class="fa fa-sort"></i></a></th>
+        <th class="description"><a ng-click="vm.sort_by('Volume')">Volume <i class="fa fa-sort"></i></a></th>
+        <th class="description"><a ng-click="vm.sort_by('RegularMarketChangePercent')">Change <i class="fa fa-sort"></i></a></th>
         <th class="description" title="non-sortable">Delete</th>
       </tr>
       </thead>
-        <tr data-dir-paginate-start="data in vm.UserTickerSymbols | orderBy:vm.sortingOrder:vm.reverse | filter:vm.search | itemsPerPage: vm.itemsPerPage" ng-init="vm.isToggled[$index] = false" ng-click="vm.isToggled[$index] = !vm.isToggled[$index]" style="cursor:pointer;">
+        <tr data-dir-paginate-start="data in vm.UserTickerSymbols | orderBy:vm.predicate:vm.reverse | filter:vm.search | itemsPerPage: vm.itemsPerPage"  ng-click="vm.isToggled($index)" ng-hide="vm.showDetails == $index" style="cursor:pointer;">
           <th scope="row">{{$index + 1}}</th>
           <td>{{data.longName}}</td>
+          <td>{{data.ticker}}</td>
+          <td>{{data["Market Cap"]}}</td>
           <td>{{data.regularMarketPrice | number:2}}</td>
-          <td>{{data.RegularMarketChange | number:2}}</td>
-          <td>{{data.RegularMarketChangePercent}}</tdßß>
-          <td>{{data["Previous Close"]}}</td>
-          <td>{{data.Open | number:2}}</td>
+          <td>{{data.Volume}}</td>
+          <td ng-class="{errorColor: (data.RegularMarketChangePercent.slice(0, -1)/100 < 0), successColor: (data.RegularMarketChangePercent.slice(0, -1)/100 > 0)}">{{data.RegularMarketChangePercent}}</td>
           <td>
             <button type="submit" ng-click="vm.deleteTickerSymbols(data.ticker)" class="fabutton">
                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
             </button>
          </td>
         </tr>
-        <tr data-dir-paginate-end ng-if="vm.isToggled[$index]" id="{{data.TickerSymbolId}}">
-            <td colspan="9">
-                Hidden row for {{data.ticker}}
+        <tr data-dir-paginate-end ng-show="vm.showDetails == $index"  ng-click="vm.isToggled($index)" id="{{data.TickerSymbolId}}" style="cursor:pointer;">
+            <td colspan="1">{{$index + 1}}</td>
+             <td>
+              <label></label><br><br>
+              <label>Name</label><br>{{data.longName}}<br><br>
+              <label>Bid</label><br>{{data.Bid}}<br><br>
+              <label>Ask</label><br>{{data.Ask}}<br><br>
+              <label>Active</label><br>{{data.Active}}<br><br>
+            </td>
+            <td colspan="2">
+              <label></label><br><br>
+              <label>Ticker Symbol</label><br>{{data.ticker}}<br><br>
+              <label>Market Cap</label><br>{{data["Market Cap"]}}<br><br>
+              <label>Volume</label><br>{{data.Volume}}<br><br>
+              <label>Avg. Volume</label><br>{{data["Avg. Volume"]}}<br><br>
+            </td>
+             <td colspan="2">
+              <label></label><br><br>
+              <label>Ticker ID</label><br>{{data.TickerSymbolId}}<br><br>
+              <label>Previous Close</label><br>{{data["Previous Close"]}}<br><br>
+              <label>Open</label><br>{{data.Open | number:2}}<br><br>
+              <label>Earnings Date</label><br>{{data["Earnings Date"]}}<br><br>
+            </td>
+            <td colspan="2"> 
+              <label></label><br><br>
+              <label>Price</label><br>{{data.regularMarketPrice}}<br><br>
+              <label>Change</label><br>{{data.RegularMarketChange | number:2}}<br><br>
+              <label>Change Percentage</label><br><span ng-class="{errorColor: (data.RegularMarketChangePercent.slice(0, -1)/100 < 0), successColor: (data.RegularMarketChangePercent.slice(0, -1)/100 > 0)}">{{data.RegularMarketChangePercent}}</span><br><br>
+              <label>52 Week Range</label><br>{{data["52 Week Range"]}}<br><br>
             </td>
         </tr>
       </tbody>

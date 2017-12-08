@@ -15,6 +15,9 @@
         vm.deleteTickerSymbols = deleteTickerSymbols;
         vm.setInputValue = setInputValue;
         vm.sort_by = sort_by;
+        vm.isToggled = isToggled;
+        vm.predicate = predicate;
+        vm.itemsPerPage = 10;
 
         initController();
 
@@ -23,23 +26,28 @@
             vm.sortingOrder = 'longName';
             vm.pageSizes = [5,10,25,50];
             vm.reverse = false;
-            vm.itemsPerPage = 10;
             getAllTickerSymbols();
         }
 
         function setInputValue(result){
             vm.AddTickerSymbolName = result.ticker;
         }
-     
+
+        function isToggled(index){
+            vm.showDetails = vm.showDetails == index ? -1 : index;
+        }
       
-      // change sorting order
-      function sort_by(newSortingOrder){
-        if (vm.sortingOrder == newSortingOrder){
-          vm.reverse = !vm.reverse;
-        }else{
-            vm.sortingOrder = newSortingOrder;
-        }  
-      }
+        // change sorting order
+       function predicate(val) {
+          return val[vm.sortingOrder];
+        }
+        function sort_by(newSortingOrder){
+            if (vm.sortingOrder == newSortingOrder){
+              vm.reverse = !vm.reverse;
+            }else{
+                vm.sortingOrder = newSortingOrder;
+            }  
+        }
 
         function getAllTickerSymbols(){
                 console.log("Home Controller - Get All Ticker Symbols ");
@@ -91,7 +99,8 @@
                 UserService.UpdateTickerSymbols(vm.user.UserId, 0, vm.AddTickerSymbolName, true).
                     then(function (response) {
                         if (response.success) {
-                            $route.reload();
+                            initController();
+                            vm.AddTickerSymbolName = '';
                         } else {
                             FlashService.Error(response.message);
                         }

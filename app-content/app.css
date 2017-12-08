@@ -203,10 +203,10 @@ form[name="registrationform"] button[type="submit"]{
 
 }
 tr:nth-child(odd){
-  background-color: white;
+  background-color: grey !important;
 }
 tr:nth-child(even){
-  background-color: white;
+  background-color: white !important;
 }
 .table .thead-dark th {
   color: #fff;
@@ -231,4 +231,13 @@ tr:nth-child(even){
 }
 hr {
   border-top: 3px solid #8c8b8b;
+}
+.errorColor{
+  color: red;
+}
+.successColor{
+  color: green;
+}
+#myTable a {
+  color: white !important;
 }
