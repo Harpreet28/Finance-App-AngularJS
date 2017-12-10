@@ -15,6 +15,7 @@
         service.RegisterUser = RegisterUser;
         service.GetSecurityQuestions = GetSecurityQuestions;
         service.getAllTickerSymbols = getAllTickerSymbols;
+        service.UpdateUserDetails = UpdateUserDetails;
         
         return service;
 
@@ -71,6 +72,14 @@
         			}) .then(success, error('Failed to get user by username'));
         }
         
+        function UpdateUserDetails(user){
+                return $http({  
+                    method: 'POST',
+                    dataType:'json',
+                    data: user, 
+                    url: "http://52.226.130.180/FinancePortfolioAPI/api/user/UpdateUserDetails"
+                    }) .then(success, error('Failed to update user profile details'));
+        }
         // private functions
 
         function success(res) {
