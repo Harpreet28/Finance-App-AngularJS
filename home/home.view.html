@@ -88,7 +88,7 @@
           <td>{{data["Market Cap"]}}</td>
           <td>{{data.regularMarketPrice | number:2}}</td>
           <td>{{data.Volume}}</td>
-          <td ng-class="{errorColor: (data.RegularMarketChangePercent.slice(0, -1)/100 < 0), successColor: (data.RegularMarketChangePercent.slice(0, -1)/100 > 0)}">{{data.RegularMarketChangePercent}}</td>
+          <td ng-class="{errorColor: (data.RegularMarketChangePercent < 0), successColor: (data.RegularMarketChangePercent > 0)}">{{data.RegularMarketChangePercent}}%</td>
           <td>
             <button type="submit" ng-click="vm.deleteTickerSymbols(data.ticker); $event.stopPropagation();" class="fabutton">
                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
@@ -122,7 +122,7 @@
               <label></label><br><br>
               <label>Price</label><br>{{data.regularMarketPrice}}<br><br>
               <label>Change</label><br>{{data.RegularMarketChange | number:2}}<br><br>
-              <label>Change Percentage</label><br>{{data.RegularMarketChangePercent}}<br><br>
+              <label>Change Percentage</label><br>{{data.RegularMarketChangePercent}}%<br><br>
               <label>52 Week Range</label><br>{{data["52 Week Range"]}}<br><br>
             </td>
         </tr>
