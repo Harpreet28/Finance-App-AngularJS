@@ -108,7 +108,7 @@
                             if(vm.UserTickerSymbols){
                                 angular.forEach(vm.UserTickerSymbols, function (ticker) {
                                     ticker.regularMarketPrice = parseFloat(ticker.regularMarketPrice);
-                                    ticker.RegularMarketChange = parseFloat(ticker.RegularMarketChange);
+                                    ticker.RegularMarketChangePercent = parseFloat(ticker.RegularMarketChangePercent);
                                 });
                             }
                             console.log(vm.UserTickerSymbols);
