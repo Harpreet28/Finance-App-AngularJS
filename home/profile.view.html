@@ -1,0 +1,138 @@
+<div class="container">
+  <nav class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav icon-home icon-white">
+        <li class="icon-home icon-white"><a href="#!/">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav">
+        <li><a href="" ng-click="vm.editProfile()">Profile</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#!/login">Logout</a></li>
+        </ul>
+    </div>
+  </nav>
+<br>
+<div ng-switch on="(vm.showEditSection)">
+  <div class="row" ng-switch-when="">
+    <div class="col-md-12">
+     <div ng-show="vm.editProfileSuccess" class="alert alert-info alert-dismissable">
+          <a class="panel-close close" ng-click="vm.editProfileSuccess = false" data-dismiss="alert">×</a> 
+          <i class="fa"></i>
+          Profile details have been updated successfully.
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 lead">User profile<hr></div>
+          </div>
+          <div class="row">
+      <div class="col-md-4 text-center">
+              <img class="img-circle avatar avatar-original" style="-webkit-user-select:none; 
+              display:block; margin:auto;" src="http://robohash.org/sitsequiquia.png?size=120x120">
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-12">
+                  <h1 class="only-bottom-margin">{{vm.user.UserName}}</h1><br>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <span class="text-muted">First Name:</span> {{vm.user.FirstName}}<br><br>
+                  <span class="text-muted">Last Name:</span> {{vm.user.LastName}}<br><br>
+                  <span class="text-muted">Birth date:</span> {{vm.user.DOB | date : "MM.dd.y"}}<br><br>
+                  <span class="text-muted">Address:</span> {{vm.user.Address}}<br><br>
+                  <span class="text-muted">Email:</span> {{vm.user.EmailAddress}}<br>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <hr><button type="edit" class="btn btn-primary btn-outline-primary pull-right" ng-click="vm.displayEditProfileSection()"><i class="glyphicon glyphicon-pencil"></i> Edit Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-switch on="(vm.showEditSection)" class="container">
+    <h1 ng-switch-when="true" >Edit Profile</h1>
+  	<hr ng-switch-when="true">
+	<div class="row" ng-switch-when="true" >
+      <div class="col-md-9 personal-info">
+        <h3>Personal info</h3>   
+        <form name="editProfile" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" ng-model="vm.editProfileObj.FirstName" ng-value="vm.editProfileObj.FirstName" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" ng-model="vm.editProfileObj.LastName" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Date of Birth:</label>
+            <div class="col-lg-8">
+              <input class="form-control" ng-model="vm.editProfile.DOB" ng-disabled="vm.editProfile.DOB" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Address:</label>
+            <div class="col-lg-8">
+              <input class="form-control" ng-model="vm.editProfileObj.Address" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" ng-model="vm.editProfileObj.EmailAddress">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Username:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text"  ng-model="vm.user.UserName" ng-disabled="vm.user.UserName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" ng-model="vm.editProfileObj.Password" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Confirm password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" ng-model="vm.confirmEditPassword" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input type="button" class="btn btn-primary" ng-click="vm.saveProfileChanges()" value="Save Changes" ng-disabled="editProfile.$invalid || vm.editProfileObj.Password !== vm.confirmEditPassword" >
+              <span></span>
+              <input type="button" class="btn btn-default" ng-click="vm.cancelEditProfile()"  value="Cancel">
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+</div>
