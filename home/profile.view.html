@@ -74,16 +74,18 @@
       <div class="col-md-9 personal-info">
         <h3>Personal info</h3>   
         <form name="editProfile" class="form-horizontal" role="form">
-          <div class="form-group">
+          <div class="form-group" ng-class="{ 'has-error': editProfile.firstName.$dirty && editProfile.firstName.$error.required }">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" ng-model="vm.editProfileObj.FirstName" ng-value="vm.editProfileObj.FirstName" type="text">
+              <input name="firstName" id="firstName" class="form-control" ng-model="vm.editProfileObj.FirstName" type="text" required>
+               <span ng-show="editProfile.firstName.$dirty && editProfile.firstName.$error.required" class="help-block">First name is required</span>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-class="{ 'has-error': editProfile.lastName.$dirty && editProfile.lastName.$error.required }">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" ng-model="vm.editProfileObj.LastName" type="text">
+              <input name="lastName" id="lastName" class="form-control" ng-model="vm.editProfileObj.LastName" type="text" required>
+              <span ng-show="editProfile.lastName.$dirty && editProfile.lastName.$error.required" class="help-block">Last name is required</span>
             </div>
           </div>
           <div class="form-group">
@@ -92,16 +94,19 @@
               <input class="form-control" ng-model="vm.editProfile.DOB" ng-disabled="vm.editProfile.DOB" type="text">
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group"  ng-class="{ 'has-error': editProfile.address.$dirty && editProfile.address.$error.required }">
             <label class="col-lg-3 control-label">Address:</label>
             <div class="col-lg-8">
-              <input class="form-control" ng-model="vm.editProfileObj.Address" type="text">
+              <input name="address" id="address" class="form-control" ng-model="vm.editProfileObj.Address" type="text" required>
+              <span ng-show="editProfile.address.$dirty && editProfile.address.$error.required" class="help-block">Address is required</span>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-class="{ 'has-error': (editProfile.email.$dirty && editProfile.email.$error.required)  || (editProfile.email.$dirty && editProfile.email.$error.pattern)}">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" ng-model="vm.editProfileObj.EmailAddress">
+              <input name="email" id="email" class="form-control" type="text" ng-model="vm.editProfileObj.EmailAddress" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+(\.[a-z.]{2,3}){1,2}$/" required>
+              <span ng-show="editProfile.email.$dirty && editProfile.email.$error.required" class="help-block">Email is required</span>
+                <span ng-show="editProfile.email.$touched && editProfile.email.$error.pattern" class="help-block">Please enter a valid email</span>
             </div>
           </div>
           <div class="form-group">
@@ -110,16 +115,23 @@
               <input class="form-control" type="text"  ng-model="vm.user.UserName" ng-disabled="vm.user.UserName">
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group"  ng-class="{ 'has-error': editProfile.password.$dirty && editProfile.password.$error.required }">
             <label class="col-md-3 control-label">Password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" ng-model="vm.editProfileObj.Password" >
+              <input name="password" id="password" class="form-control" type="password" ng-model="vm.editProfileObj.Password" required>
+              <span ng-show="editProfile.password.$dirty && editProfile.password.$error.required" class="help-block">Password is required</span>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group"  ng-class="{ 'has-error': editProfile.confirmpassword.$dirty && editProfile.confirmpassword.$error.required }">
             <label class="col-md-3 control-label">Confirm password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" ng-model="vm.confirmEditPassword" >
+              <input name="confirmpassword" id="confirmpassword" class="form-control" type="password" ng-model="vm.confirmEditPassword" ng-model-options="{ updateOn: 'blur' }" required>
+              <div class="clearFloat" ng-class="{ 'has-error': editProfile.confirmpassword.$dirty && editProfile.confirmpassword.$error.required}" ng-show="editProfile.confirmpassword.$touched">
+                <span ng-show="!vm.confirmEditPassword" class="help-block">Password is required</span>
+            </div>
+              <div class="clearFloat" ng-class="{ 'has-error': vm.editProfileObj.Password !== vm.confirmEditPassword }" ng-show="editProfile.confirmpassword.$touched">
+                <span ng-show="vm.editProfileObj.Password !== vm.confirmEditPassword && vm.confirmEditPassword"  class="help-block">Password mismatch</span>
+            </div>
             </div>
           </div>
           <div class="form-group">
