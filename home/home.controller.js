@@ -120,6 +120,7 @@
 
         function addTickerSymbols(){
                 console.log("Home Controller - Add Ticker Symbol");
+                vm.addTickerSymbolName = vm.AddTickerSymbolName;
                 UserService.UpdateTickerSymbols(vm.user.UserId, 0, vm.AddTickerSymbolName, true).
                     then(function (response) {
                         if (response.success) {
@@ -138,6 +139,7 @@
         
         function deleteTickerSymbols(DeleteTickerSymbolName){
             console.log("Home Controller - Delete Ticker Symbol" + DeleteTickerSymbolName);
+            vm.deleteTickerSymbolName = DeleteTickerSymbolName;
             UserService.UpdateTickerSymbols(vm.user.UserId, 0, DeleteTickerSymbolName, false).
                 then(function (response) {
                     if (response.success) {
@@ -175,7 +177,6 @@
                             vm.editProfileSuccess = false;
                         }, 5000);
                         loadCurrentUser();
-                        FlashService.Success('Profile changes successful', true);
                     } else {
                         FlashService.Error(response.message);
                     }

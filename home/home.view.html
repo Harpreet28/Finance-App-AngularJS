@@ -23,16 +23,16 @@
   <div ng-if="vm.addTickerSuccess" class="alert alert-info alert-dismissable" dismiss-on-timeout="1000">
       <a class="panel-close close" ng-click="vm.addTickerSuccess = false">×</a> 
       <i class="fa"></i>
-      A new ticker has been added to your profile.
+      {{vm.addTickerSymbolName}} ticker has been added to your profile.
   </div>
   <div ng-if="vm.deleteTickerSuccess" class="alert alert-info alert-dismissable" dismiss-on-timeout="1000">
       <a class="panel-close close" ng-click="vm.deleteTickerSuccess = false">×</a> 
       <i class="fa"></i>
-      A  ticker has been deleted from your profile.
+      {{vm.deleteTickerSymbolName }} ticker has been deleted from your profile.
   </div>
     <div class="row">
       <div class="col-md-12">
-      <h3 align="center">{{vm.user.UserName}}, Welcome to your Finance Portfolio</h3>
+      <h3 align="center">{{vm.user.UserName}}, welcome to your Finance Portfolio!</h3>
       </div>
     </div>
     <br>
@@ -74,14 +74,14 @@
         <th class="description" title="non-sortable">#</th>
         <th class="description"><a ng-click="vm.sort_by('longName')">Name <i class="fa fa-sort"></i></a></th>
         <th class="description"><a ng-click="vm.sort_by('ticker')">Ticker <i class="fa fa-sort"></i></a></th>
-        <th class="description"><a ng-click="vm.sort_by('Market Cap')">Market Cap <i class="fa fa-sort"></i></a></th>
+        <th class="description" title="non-sortable">Market Cap</th>
         <th class="description"><a ng-click="vm.sort_by('regularMarketPrice')">Price <i class="fa fa-sort"></i></a></th>
-        <th class="description"><a ng-click="vm.sort_by('Volume')">Volume <i class="fa fa-sort"></i></a></th>
+        <th class="description" title="non-sortable">Volume</th>
         <th class="description"><a ng-click="vm.sort_by('RegularMarketChangePercent')">Change <i class="fa fa-sort"></i></a></th>
         <th class="description" title="non-sortable">Delete</th>
       </tr>
       </thead>
-        <tr data-dir-paginate-start="data in vm.UserTickerSymbols | orderBy:vm.predicate:vm.reverse | filter:vm.search | itemsPerPage: vm.itemsPerPage"  ng-click="vm.isToggled($index)" ng-hide="vm.showDetails == $index" style="cursor:pointer;">
+        <tr data-dir-paginate-start="data in vm.UserTickerSymbols | orderBy:vm.predicate:vm.reverse | filter:vm.search | itemsPerPage: vm.itemsPerPage"  ng-click="vm.isToggled($index)"  style="cursor:pointer;">
           <th scope="row">{{$index + 1}}</th>
           <td>{{data.longName}}</td>
           <td>{{data.ticker}}</td>
@@ -96,34 +96,26 @@
          </td>
         </tr>
         <tr data-dir-paginate-end ng-show="vm.showDetails == $index"  ng-click="vm.isToggled($index)" id="{{data.TickerSymbolId}}" style="cursor:pointer;">
-            <td colspan="1">{{$index + 1}}</td>
+            <td></td>
              <td>
               <label></label><br><br>
-              <label>Name</label><br>{{data.longName}}<br><br>
               <label>Bid</label><br>{{data.Bid}}<br><br>
               <label>Ask</label><br>{{data.Ask}}<br><br>
-              <label>Active</label><br>{{data.Active}}<br><br>
             </td>
-            <td colspan="2">
+             <td colspan="2">
               <label></label><br><br>
-              <label>Ticker Symbol</label><br>{{data.ticker}}<br><br>
-              <label>Market Cap</label><br>{{data["Market Cap"]}}<br><br>
-              <label>Volume</label><br>{{data.Volume}}<br><br>
+               <label>Open</label><br>{{data.Open | number:2}}<br><br>
+              <label>Previous Close</label><br>{{data["Previous Close"]}}<br><br>
+            </td>
+            <td colspan="2"> 
+              <label></label><br><br>
+              <label>Change</label><br>{{data.RegularMarketChange | number:2}}<br><br>
               <label>Avg. Volume</label><br>{{data["Avg. Volume"]}}<br><br>
             </td>
              <td colspan="2">
               <label></label><br><br>
-              <label>Ticker ID</label><br>{{data.TickerSymbolId}}<br><br>
-              <label>Previous Close</label><br>{{data["Previous Close"]}}<br><br>
-              <label>Open</label><br>{{data.Open | number:2}}<br><br>
-              <label>Earnings Date</label><br>{{data["Earnings Date"]}}<br><br>
-            </td>
-            <td colspan="2"> 
-              <label></label><br><br>
-              <label>Price</label><br>{{data.regularMarketPrice}}<br><br>
-              <label>Change</label><br>{{data.RegularMarketChange | number:2}}<br><br>
-              <label>Change Percentage</label><br>{{data.RegularMarketChangePercent}}%<br><br>
               <label>52 Week Range</label><br>{{data["52 Week Range"]}}<br><br>
+              <label>Earnings Date</label><br>{{data["Earnings Date"]}}<br><br>
             </td>
         </tr>
       </tbody>
