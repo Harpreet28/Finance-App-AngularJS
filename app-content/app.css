@@ -1,6 +1,6 @@
 ﻿html {
   font-family: "Tenor Sans", sans-serif;
-  background-image: url("../Images/stock.jpg");
+  background: url("../Images/stock.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
