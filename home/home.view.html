@@ -38,16 +38,19 @@
     <br>
     <div class="row">
         <div class="col-lg-12">
-            <div class="input-group">
-                <input placeholder="Please enter a ticker name to add it to your portfolio" type="text" name="Addtickersymbol" id="addTickerSymbol" list="myList" class="form-control dropdown dropdown-scroll inputStyle" ng-model="vm.AddTickerSymbolName">
+            <div class="input-group" ng-class= "(vm.AddTickerSymbolName && !vm.isTickerValidFlag) ? 'has-error': ''">
+                <input placeholder="Please enter a ticker name to add it to your portfolio" type="text" name="Addtickersymbol" id="addTickerSymbol" list="myList" class="form-control dropdown dropdown-scroll inputStyle" ng-change="vm.isTickerValid()" ng-model="vm.AddTickerSymbolName" ng-minlength="2" >
                 <datalist id="myList" class="dataListWidth">
-                    <option ng-click="vm.setInputValue(result)" ng-repeat="result in vm.tickerSymbols | filter : vm.AddTickerSymbolName" value={{result.ticker}}></option>
-                </datalist>  
+                    <option ng-click="vm.setInputValue(result)" ng-repeat="result in (vm.AddTickerSymbolName ? (vm.tickerSymbols | filter:vm.AddTickerSymbolName) : []) track by $index" value={{result.ticker}}></option>
+                </datalist>
                 <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary btn-lg active" ng-disabled = "!vm.AddTickerSymbolName" ng-click="vm.addTickerSymbols()" >Add New Ticker</button>
+                    <button type="submit" class="btn btn-primary btn-lg active" ng-disabled = "!vm.AddTickerSymbolName || !vm.isTickerValidFlag" ng-click="vm.addTickerSymbols()" >Add New Ticker</button>
                 </span>
             </div>
         </div>
+    </div>
+    <div class="has-error" ng-show="vm.AddTickerSymbolName && !vm.isTickerValidFlag">
+    <span class="help-block">Please enter a valid ticker name</span>
     </div>
     <br>
     <br>
@@ -85,9 +88,9 @@
           <th scope="row">{{$index + 1}}</th>
           <td>{{data.longName}}</td>
           <td>{{data.ticker}}</td>
-          <td>{{data["Market Cap"]}}</td>
-          <td>{{data.regularMarketPrice | number:2}}</td>
-          <td>{{data.Volume}}</td>
+          <td>${{data["Market Cap"]}}</td>
+          <td>{{data.regularMarketPrice | currency}}</td>
+          <td>${{data.Volume}}</td>
           <td ng-class="{errorColor: (data.RegularMarketChangePercent < 0), successColor: (data.RegularMarketChangePercent > 0)}">{{data.RegularMarketChangePercent}}%</td>
           <td>
             <button type="submit" ng-click="vm.deleteTickerSymbols(data.ticker); $event.stopPropagation();" class="fabutton">
@@ -97,20 +100,21 @@
         </tr>
         <tr data-dir-paginate-end ng-show="vm.showDetails == $index"  ng-click="vm.isToggled($index)" id="{{data.TickerSymbolId}}" style="cursor:pointer;">
             <td></td>
-             <td>
-              <label></label><br><br>
-              <label>Bid</label><br>{{data.Bid}}<br><br>
-              <label>Ask</label><br>{{data.Ask}}<br><br>
-            </td>
              <td colspan="2">
               <label></label><br><br>
-               <label>Open</label><br>{{data.Open | number:2}}<br><br>
-              <label>Previous Close</label><br>{{data["Previous Close"]}}<br><br>
+               <label>Open</label><br>{{data.Open | currency}}<br><br>
+              <label>Previous Close</label><br>{{data["Previous Close"] | currency}}<br><br>
+              <label>Last Updated</label><br>{{data.LastUpdated}}<br><br>
+            </td>
+             <td>
+              <label></label><br><br>
+              <label>Bid</label><br>${{data.Bid}}<br><br>
+              <label>Ask</label><br>${{data.Ask}}<br><br>
             </td>
             <td colspan="2"> 
               <label></label><br><br>
-              <label>Change</label><br>{{data.RegularMarketChange | number:2}}<br><br>
-              <label>Avg. Volume</label><br>{{data["Avg. Volume"]}}<br><br>
+              <label>Change</label><br>{{data.RegularMarketChange | currency}}<br><br>
+              <label>Avg. Volume</label><br>${{data["Avg. Volume"]}}<br><br>
             </td>
              <td colspan="2">
               <label></label><br><br>

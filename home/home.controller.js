@@ -23,9 +23,12 @@
         vm.editProfile = editProfile;
         vm.cancelEditProfile = cancelEditProfile;
         vm.displayEditProfileSection = displayEditProfileSection;
+        vm.isTickerValid = isTickerValid;
+        vm.limit = 15;
         vm.editProfileSuccess = false;
         vm.addTickerSuccess = false;
         vm.deleteTickerSuccess = false;
+        vm.isTickerValidFlag = false;
         vm.showEditSection = '';
 
         initController();
@@ -60,7 +63,17 @@
         function isToggled(index){
             vm.showDetails = vm.showDetails == index ? -1 : index;
         }
-      
+
+        function isTickerValid () {
+            for ( var i = 0; i <= vm.tickerSymbols.length; i++){
+                if(vm.tickerSymbols[i] && (vm.tickerSymbols[i].ticker === vm.AddTickerSymbolName)) {
+                    vm.isTickerValidFlag = true;
+                    return;
+                } else{
+                    vm.isTickerValidFlag = false;
+                }   
+            }
+        }
         // change sorting order
        function predicate(val) {
           return val[vm.sortingOrder];
