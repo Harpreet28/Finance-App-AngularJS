@@ -111,8 +111,8 @@ a, a:hover{
   margin-bottom:20px;
   background-color: #fff;
 }
-form[name="accountHelpform"] button[type="submit"]{
-  margin-bottom:10px;
+.btnAccountForm{
+  margin-top:10px;
 }
 
 /* Registration Page Styling **/
