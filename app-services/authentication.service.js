@@ -32,37 +32,6 @@
         function error(errorMsg) {
             return { success: false, message:errorMsg };
         }
-        		/*return UserService.GetLoginDetails(username, password)
-        			.then(function (response) {
-                    if (response.data.UserId != 0) {
-                        response = { success: true };
-                        console.log("success");
-                    } else {
-                        response = { success: false, message: 'Username or password is incorrect' };
-                    }
-        			});*/
-        
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-           /* $timeout(function () {
-                var response;
-                UserService.GetByUsername(username)
-                    .then(function (user) {
-                        if (user !== null && user.password === password) {
-                            response = { success: true };
-                        } else {
-                            response = { success: false, message: 'Username or password is incorrect' };
-                        }
-                        callback(response);
-                    });
-            }, 1000);*/
-            /* Working code for login
-             $http({  
-			method: 'POST',
-			dataType:'json',
-			data: { username: "patel", password: "patel" },
-			url: "http://13.92.135.96/FinancePortfolioAPI/api/User/ValidateUser/" 
-			}) .then(success, error('Failed to get user by username'));*/
 
         function SetCredentials(username, password, userId) {
             var authdata = Base64.encode(username + ':' + password);
