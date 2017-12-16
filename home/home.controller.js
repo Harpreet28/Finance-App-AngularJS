@@ -24,11 +24,9 @@
         vm.cancelEditProfile = cancelEditProfile;
         vm.displayEditProfileSection = displayEditProfileSection;
         vm.isTickerValid = isTickerValid;
-        vm.limit = 15;
         vm.editProfileSuccess = false;
         vm.addTickerSuccess = false;
         vm.deleteTickerSuccess = false;
-        vm.isTickerValidFlag = false;
         vm.showEditSection = '';
 
         initController();
