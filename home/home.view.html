@@ -39,7 +39,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="input-group" ng-class= "(vm.AddTickerSymbolName && !vm.isTickerValidFlag) ? 'has-error': ''">
-                <input placeholder="Please enter a ticker name to add it to your portfolio" type="text" name="Addtickersymbol" id="addTickerSymbol" list="myList" class="form-control dropdown dropdown-scroll inputStyle" ng-change="vm.isTickerValid()" ng-model="vm.AddTickerSymbolName" ng-minlength="2" >
+                <input placeholder="Please enter a ticker name to add it to your portfolio" type="text" name="Addtickersymbol" id="addTickerSymbol" list="myList" class="form-control dropdown dropdown-scroll inputStyle" ng-change="vm.isTickerValid()" ng-model="vm.AddTickerSymbolName" ng-minlength="2">
                 <datalist id="myList" class="dataListWidth">
                     <option ng-click="vm.setInputValue(result)" ng-repeat="result in (vm.AddTickerSymbolName ? (vm.tickerSymbols | filter:vm.AddTickerSymbolName) : []) track by $index" value={{result.ticker}}></option>
                 </datalist>
@@ -86,12 +86,12 @@
       </thead>
         <tr data-dir-paginate-start="data in vm.UserTickerSymbols | orderBy:vm.predicate:vm.reverse | filter:vm.search | itemsPerPage: vm.itemsPerPage"  ng-click="vm.isToggled($index)"  style="cursor:pointer;">
           <th scope="row">{{$index + 1}}</th>
-          <td>{{data.longName}}</td>
-          <td>{{data.ticker}}</td>
-          <td>${{data["Market Cap"]}}</td>
-          <td>{{data.regularMarketPrice | currency}}</td>
-          <td>${{data.Volume}}</td>
-          <td ng-class="{errorColor: (data.RegularMarketChangePercent < 0), successColor: (data.RegularMarketChangePercent > 0)}">{{data.RegularMarketChangePercent}}%</td>
+          <td>{{data.longName || "N/A"}}</td>
+          <td>{{data.ticker || "N/A"}}</td>
+          <td>${{data["Market Cap"] || "N/A"}}</td>
+          <td>${{data.regularMarketPrice || "N/A"}}</td>
+          <td>${{data.Volume || "N/A"}}</td>
+          <td ng-class="{errorColor: (data.RegularMarketChangePercent < 0), successColor: (data.RegularMarketChangePercent > 0)}">{{data.RegularMarketChangePercent || "N/A"}}%</td>
           <td>
             <button type="submit" ng-click="vm.deleteTickerSymbols(data.ticker); $event.stopPropagation();" class="fabutton">
                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
@@ -102,24 +102,24 @@
             <td></td>
              <td colspan="2">
               <label></label><br><br>
-               <label>Open</label><br>{{data.Open | currency}}<br><br>
-              <label>Previous Close</label><br>{{data["Previous Close"] | currency}}<br><br>
-              <label>Last Updated</label><br>{{data.LastUpdated}}<br><br>
+               <label>Open</label><br>${{data.Open || "N/A"}}<br><br>
+              <label>Previous Close</label><br>${{data["Previous Close"] || "N/A"}}<br><br>
+              <label>Last Updated</label><br>{{data.LastUpdated || "N/A"}}<br><br>
             </td>
              <td>
               <label></label><br><br>
-              <label>Bid</label><br>${{data.Bid}}<br><br>
-              <label>Ask</label><br>${{data.Ask}}<br><br>
+              <label>Bid</label><br>${{data.Bid || "N/A"}}<br><br>
+              <label>Ask</label><br>${{data.Ask || "N/A"}}<br><br>
             </td>
             <td colspan="2"> 
               <label></label><br><br>
-              <label>Change</label><br>{{data.RegularMarketChange | currency}}<br><br>
-              <label>Avg. Volume</label><br>${{data["Avg. Volume"]}}<br><br>
+              <label>Change</label><br>${{data.RegularMarketChange || "N/A"}}<br><br>
+              <label>Avg. Volume</label><br>${{data["Avg. Volume"] || "N/A"}}<br><br>
             </td>
              <td colspan="2">
               <label></label><br><br>
-              <label>52 Week Range</label><br>{{data["52 Week Range"]}}<br><br>
-              <label>Earnings Date</label><br>{{data["Earnings Date"]}}<br><br>
+              <label>52 Week Range</label><br>{{data["52 Week Range"] || "N/A"}}<br><br>
+              <label>Earnings Date</label><br>{{data["Earnings Date"] || "N/A"}}<br><br>
             </td>
         </tr>
       </tbody>
