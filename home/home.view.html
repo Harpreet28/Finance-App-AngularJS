@@ -90,7 +90,7 @@
           <td>{{data.ticker || "N/A"}}</td>
           <td>${{data["Market Cap"] || "N/A"}}</td>
           <td>${{data.regularMarketPrice || "N/A"}}</td>
-          <td>${{data.Volume || "N/A"}}</td>
+          <td>{{data.Volume || "N/A"}}</td>
           <td ng-class="{errorColor: (data.RegularMarketChangePercent < 0), successColor: (data.RegularMarketChangePercent > 0)}">{{data.RegularMarketChangePercent || "N/A"}}%</td>
           <td>
             <button type="submit" ng-click="vm.deleteTickerSymbols(data.ticker); $event.stopPropagation();" class="fabutton">
@@ -100,21 +100,21 @@
         </tr>
         <tr data-dir-paginate-end ng-show="vm.showDetails == $index"  ng-click="vm.isToggled($index)" id="{{data.TickerSymbolId}}" style="cursor:pointer;">
             <td></td>
-             <td colspan="2">
+             <td>
               <label></label><br><br>
                <label>Open</label><br>${{data.Open || "N/A"}}<br><br>
               <label>Previous Close</label><br>${{data["Previous Close"] || "N/A"}}<br><br>
               <label>Last Updated</label><br>{{data.LastUpdated || "N/A"}}<br><br>
             </td>
-             <td>
+             <td colspan="2">
               <label></label><br><br>
-              <label>Bid</label><br>${{data.Bid || "N/A"}}<br><br>
-              <label>Ask</label><br>${{data.Ask || "N/A"}}<br><br>
+              <label>Bid</label><br>{{data.Bid || "N/A"}}<br><br>
+              <label>Ask</label><br>{{data.Ask || "N/A"}}<br><br>
             </td>
             <td colspan="2"> 
               <label></label><br><br>
               <label>Change</label><br>${{data.RegularMarketChange || "N/A"}}<br><br>
-              <label>Avg. Volume</label><br>${{data["Avg. Volume"] || "N/A"}}<br><br>
+              <label>Avg. Volume</label><br>{{data["Avg. Volume"] || "N/A"}}<br><br>
             </td>
              <td colspan="2">
               <label></label><br><br>
